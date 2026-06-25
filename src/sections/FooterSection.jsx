@@ -3,7 +3,7 @@ import EmwWall from "../components/EmwWall.jsx";
 const footerLinks = [
   { href: "#top", label: "Elements Mediaworks" },
   { href: "#top", label: "Brand Identity & Guidelines" },
-  { href: "#about", label: "V 2.0 March 2024" },
+  { href: "#services", label: "V 2.0 March 2024" },
   { href: "#contact", label: "For Internal Uses Only" },
 ];
 

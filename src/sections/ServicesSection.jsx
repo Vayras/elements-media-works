@@ -1,39 +1,55 @@
-const serviceCards = [
-  { className: "service-card--red", label: "GO-GETTER" },
-  { className: "service-card--yellow", label: "INNOVATOR" },
-  { className: "service-card--blue", label: "RISK-TAKER" },
-  { className: "service-card--green", label: "LEADER" },
-  { className: "service-card--pink", label: "Brand Essence" },
+const serviceItems = [
+  {
+    number: "01",
+    title: "Content Marketing",
+    description: "With bespoke IPs and AFPs: stories that connect and convert.",
+  },
+  {
+    number: "02",
+    title: "Brand Solutions",
+    description: "Designing & executing campaigns that shape perception & drive action.",
+  },
+  {
+    number: "03",
+    title: "Marketing Innovations",
+    description: "Leveraging new tools & technology to deliver fresh brand experiences.",
+  },
+  {
+    number: "04",
+    title: "Talent & Influencers",
+    description: "Authentic voices amplified across various cultural tiers.",
+  },
+  {
+    number: "05",
+    title: "Licensing & Merchandising",
+    description: "Tangible extensions and licensed collaborations that deepen brand love.",
+  },
 ];
 
 function ServicesSection() {
   return (
     <section
-      className="section-block services surface-blue"
+      className="section-block services-overview surface-blue"
       id="services"
-      data-section-label="Brand Essence"
+      data-section-label="Our Services"
       data-section-color="#FADA5E"
     >
-      <div className="services__sticky">
-        <div className="services__track" id="servicesTrack">
-          <article className="services__panel services__panel--intro reveal">
-            <div className="services__intro">
-              <div className="phrase-blob blob-one">
-                <span>Brand</span>
-                <span>Essence</span>
-                <span>Summary</span>
-              </div>
-              <p className="services__copy">
-                Think of these parameters as a guide to representing our brand
-                in every interaction, both internally and externally.
-              </p>
-            </div>
-          </article>
-          {serviceCards.map((card) => (
-            <article className="services__panel reveal" key={card.label}>
-              <div className={`service-card ${card.className}`}>
-                <span>{card.label}</span>
-              </div>
+      <div className="services-overview__inner">
+        <div className="services-overview__head reveal">
+          <span className="services-overview__note" aria-hidden="true"></span>
+        </div>
+
+        <div className="services-overview__title-row reveal">
+          <h2 className="services-overview__title">Our Services</h2>
+          <span className="services-overview__eyebrow">Span Across</span>
+        </div>
+
+        <div className="services-overview__grid" aria-label="Services categories">
+          {serviceItems.map((service) => (
+            <article className="services-overview__card reveal" key={service.title}>
+              <span className="services-overview__number">{service.number}</span>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
             </article>
           ))}
         </div>

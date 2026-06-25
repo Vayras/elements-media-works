@@ -23,8 +23,8 @@ function AboutSection() {
             Our Vision
           </a>
         </div>
-        <a className="brand-feature reveal" href="#projects" aria-label="Brand Guidelines">
-          <span>Brand Guidelines</span>
+        <a className="brand-feature reveal" href="#projects" aria-label="Our Work">
+          <span>Our Work</span>
           <img src="/assets/images/image-video.webp" alt="" />
         </a>
       </div>

@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import Cursor from "./components/Cursor.jsx";
 import Header from "./components/Header.jsx";
+import CultureSection from "./sections/CultureSection.jsx";
 import MenuPanel from "./components/MenuPanel.jsx";
 import Preloader from "./components/Preloader.jsx";
-import SectionMarker from "./components/SectionMarker.jsx";
-import AboutSection from "./sections/AboutSection.jsx";
 import FooterSection from "./sections/FooterSection.jsx";
 import HeroSection from "./sections/HeroSection.jsx";
 import ServicesSection from "./sections/ServicesSection.jsx";
@@ -17,7 +16,6 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [preloaderProgress, setPreloaderProgress] = useState(0);
   const [showPreloader, setShowPreloader] = useState(true);
-  const [sectionLabel, setSectionLabel] = useState("Brand Guidelines");
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", isMenuOpen);
@@ -59,6 +57,7 @@ function App() {
     const body = document.body;
     const sections = document.querySelectorAll(".section-block[data-section-label]");
     const aboutStatement = document.querySelector(".about__statement");
+    const cultureSection = document.querySelector("#culture");
     const servicesSection = document.querySelector("#services");
     const servicesTrack = document.querySelector("#servicesTrack");
     let ticking = false;
@@ -94,13 +93,21 @@ function App() {
       aboutStatement.style.setProperty("--statement-opacity", opacity.toFixed(3));
     };
 
+    const updateCultureOpacity = () => {
+      if (!cultureSection) return;
+
+      const start = cultureSection.offsetTop - window.innerHeight;
+      const end = cultureSection.offsetTop;
+      const progress = clamp((window.scrollY - start) / (end - start), 0, 1);
+      const opacity = 0.1 + progress * 0.9;
+
+      cultureSection.style.setProperty("--culture-opacity", opacity.toFixed(3));
+    };
+
     const applySectionState = (section) => {
       if (!section) return;
 
-      const { sectionLabel: label, sectionColor: color } = section.dataset;
-      if (label) {
-        setSectionLabel((currentLabel) => (currentLabel === label ? currentLabel : label));
-      }
+      const { sectionColor: color } = section.dataset;
       if (color) root.style.setProperty("--live-color", color);
       body.classList.toggle("in-footer", section.classList.contains("site-footer"));
     };
@@ -115,6 +122,7 @@ function App() {
 
       applySectionState(activeSection);
       updateStatementOpacity();
+      updateCultureOpacity();
       updateServicesScroll();
       ticking = false;
     };
@@ -138,6 +146,111 @@ function App() {
       body.classList.remove("in-footer");
     };
   }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) return undefined;
+
+    let isSnapping = false;
+    let unlockTimer;
+    let lastWheelTime = 0;
+    const snapDuration = 900;
+
+    const getSnapPoints = () =>
+      [...document.querySelectorAll(".section-block[data-section-label]")]
+        .map((section) => ({
+          id: section.id,
+          // Use the element's natural document position. getBoundingClientRect()
+          // changes while sticky sections are pinned and can cause half-section snaps.
+          top: Math.round(section.offsetTop),
+        }))
+        .sort((a, b) => a.top - b.top);
+
+    const getCurrentSnapIndex = (snapPoints) => {
+      const currentTop = window.scrollY;
+      return snapPoints.reduce((nearestIndex, point, index) => {
+        const nearestDistance = Math.abs(snapPoints[nearestIndex].top - currentTop);
+        const pointDistance = Math.abs(point.top - currentTop);
+        return pointDistance < nearestDistance ? index : nearestIndex;
+      }, 0);
+    };
+
+    const lockUntilScrollSettles = () => {
+      isSnapping = true;
+      window.clearTimeout(unlockTimer);
+      unlockTimer = window.setTimeout(() => {
+        isSnapping = false;
+      }, snapDuration);
+    };
+
+    const snapTo = (direction) => {
+      const snapPoints = getSnapPoints();
+      if (!snapPoints.length) return;
+
+      const currentIndex = getCurrentSnapIndex(snapPoints);
+      const targetIndex = clamp(currentIndex + direction, 0, snapPoints.length - 1);
+      const target = snapPoints[targetIndex];
+      if (!target || targetIndex === currentIndex) return;
+
+      lockUntilScrollSettles();
+      window.scrollTo({ top: target.top, behavior: "smooth" });
+    };
+
+    const snapToEdge = (edge) => {
+      const snapPoints = getSnapPoints();
+      const target = edge === "start" ? snapPoints[0] : snapPoints[snapPoints.length - 1];
+      if (!target) return;
+
+      lockUntilScrollSettles();
+      window.scrollTo({ top: target.top, behavior: "smooth" });
+    };
+
+    const handleWheel = (event) => {
+      if (Math.abs(event.deltaY) < 12 || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      event.preventDefault();
+
+      const now = Date.now();
+      if (isSnapping || now - lastWheelTime < snapDuration) return;
+
+      lastWheelTime = now;
+      snapTo(event.deltaY > 0 ? 1 : -1);
+    };
+
+    const handleKeyDown = (event) => {
+      const target = event.target;
+      const isTyping =
+        target instanceof HTMLElement &&
+        (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+      const isNextKey = ["ArrowDown", "PageDown"].includes(event.key) || (event.key === " " && !event.shiftKey);
+      const isPreviousKey = ["ArrowUp", "PageUp"].includes(event.key) || (event.key === " " && event.shiftKey);
+      const isEdgeKey = ["Home", "End"].includes(event.key);
+
+      if (isTyping || event.metaKey || event.ctrlKey || event.altKey || (!isNextKey && !isPreviousKey && !isEdgeKey)) {
+        return;
+      }
+
+      event.preventDefault();
+      if (isSnapping) return;
+
+      if (isNextKey) {
+        snapTo(1);
+      } else if (isPreviousKey) {
+        snapTo(-1);
+      } else if (event.key === "Home") {
+        snapToEdge("start");
+      } else if (event.key === "End") {
+        snapToEdge("end");
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.clearTimeout(unlockTimer);
+    };
+  }, [isMenuOpen]);
 
   useEffect(() => {
     if (!("IntersectionObserver" in window)) {
@@ -208,11 +321,10 @@ function App() {
       <Cursor />
       <Header isMenuOpen={isMenuOpen} onMenuToggle={() => setIsMenuOpen((isOpen) => !isOpen)} />
       <MenuPanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-      <SectionMarker label={sectionLabel} />
       <main>
-        <HeroSection />
-        <AboutSection />
+        <HeroSection startTyping={!showPreloader} />
         <ServicesSection />
+        <CultureSection />
         <WorkSection />
       </main>
       <FooterSection />

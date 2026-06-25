@@ -1,14 +1,13 @@
 const metaLinks = [
-  { href: "#top", label: "Brand Guidelines" },
-  { href: "#about", label: "V 2.0 March 2024" },
+  { href: "#services", label: "V 2.0 March 2024" },
   { href: "#contact", label: "For Internal Uses Only" },
   { href: "https://www.elementsmediaworks.com", label: "www.elementsmediaworks.com" },
 ];
 
 const navLinks = [
-  { href: "#top", label: "Brand Guidelines" },
-  { href: "#about", label: "Introduction" },
-  { href: "#services", label: "Brand Essence" },
+  { href: "#top", label: "Home" },
+  { href: "#services", label: "Services" },
+  { href: "#culture", label: "Culture" },
   { href: "#projects", label: "Work" },
   { href: "#contact", label: "Contact" },
 ];

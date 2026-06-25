@@ -41,9 +41,9 @@
 html {
   scroll-behavior: smooth;
   background: var(--dark-blue);
-  /* snap each full-height section into view; proximity keeps the tall
-     services section scrollable without trapping */
-  scroll-snap-type: y proximity;
+  /* React handles one-section-at-a-time snapping; CSS snap is disabled to avoid fighting sticky sections. */
+  scroll-snap-type: none;
+  scroll-padding-top: 0;
 }
 
 body {
@@ -121,15 +121,18 @@ address {
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  /* each section snaps to the top of the viewport as you scroll */
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
 
-/* services is a 600vh internal horizontal-scroll experience; only snap to its
-   start so the user can scroll freely through it */
+.section-block:not(.services) {
+  position: sticky;
+  top: 0;
+}
+
+/* services keeps its own 600vh sticky horizontal-scroll experience. */
 .services {
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
 }
 
 .site-header {
@@ -328,19 +331,25 @@ body.in-footer .site-header .brand {
 .cursor {
   position: fixed;
   z-index: 1400;
-  width: 1.35rem;
-  height: 1.1rem;
-  color: var(--yellow);
+  width: 4.8rem;
+  height: 4rem;
+  color: #fff;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  transition: width 160ms ease, height 160ms ease, background 160ms ease;
-  mix-blend-mode: normal;
+  transition: transform 160ms ease, width 160ms ease, height 160ms ease;
+  mix-blend-mode: difference;
 }
 
 .cursor.is-hovering {
-  width: 3rem;
-  height: 2.55rem;
-  background: var(--pink);
+  width: 5.6rem;
+  height: 4.65rem;
+}
+
+@media (pointer: fine) {
+  body,
+  body * {
+    cursor: none;
+  }
 }
 
 .preloader {
@@ -499,8 +508,45 @@ body.loaded #loaderWall {
 
 .hero {
   display: grid;
-  place-items: center;
+  align-items: center;
+  justify-items: start;
   padding: 6rem var(--page-pad) 4rem;
+}
+
+.hero-typewriter {
+  width: min(68rem, 92vw);
+  color: var(--yellow);
+  font-size: clamp(2.5rem, 7vw, 6.9rem);
+  line-height: 0.95;
+  text-align: left;
+  text-wrap: balance;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 0.08em;
+  animation: caretBlink 780ms steps(1) infinite;
+}
+
+.scroll-indicator {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--yellow);
+  font-size: var(--small);
+  line-height: 1;
+  animation: scrollCue 1.4s ease-in-out infinite;
+}
+
+.scroll-indicator__shape {
+  display: block;
+  width: 1.55rem;
+  height: 1.25rem;
+  background: currentColor;
+  clip-path: polygon(0 22%, 34% 0, 55% 16%, 83% 0, 100% 18%, 100% 78%, 64% 100%, 26% 84%, 0 92%);
 }
 
 .skip-intro {
@@ -646,6 +692,16 @@ body.loaded #loaderWall {
   width: 100%;
   height: 100svh;
   overflow: hidden;
+}
+
+.services__snap-point {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .services__track {
@@ -881,8 +937,135 @@ body.loaded #loaderWall {
   font-size: var(--small);
 }
 
+/* ---- Services overview section ---- */
+.services-overview {
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding: clamp(2.6rem, 6vw, 5rem) clamp(1.6rem, 6vw, 5rem);
+  background: var(--dark-blue);
+  color: var(--yellow);
+}
+
+.services-overview__inner {
+  width: min(78rem, 100%);
+  margin: 0 auto;
+}
+
+.services-overview__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.services-overview__note {
+  width: 30px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--yellow);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+}
+
+.services-overview__title-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+.services-overview__title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 10vw, 7.4rem);
+  line-height: 0.9;
+  color: var(--yellow);
+}
+
+.services-overview__eyebrow {
+  padding-bottom: 0.6rem;
+  color: var(--yellow);
+  font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+  white-space: nowrap;
+}
+
+.services-overview__grid {
+  margin-top: clamp(1.5rem, 4vw, 2.4rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.72rem;
+}
+
+.services-overview__card {
+  position: relative;
+  min-height: clamp(5.8rem, 11.5svh, 7.2rem);
+  display: grid;
+  grid-template-columns: minmax(3.5rem, 0.22fr) minmax(14rem, 0.9fr) minmax(16rem, 1.15fr);
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  padding: clamp(0.85rem, 1.8vw, 1.25rem) clamp(1rem, 2.5vw, 1.8rem);
+  overflow: hidden;
+  color: var(--dark-blue);
+  background: var(--yellow);
+  clip-path: polygon(0 0, 96% 0, 100% 28%, 98% 100%, 4% 100%, 0 72%);
+  transition: transform 180ms ease, clip-path 180ms ease, background 180ms ease;
+}
+
+.services-overview__card:nth-child(even) {
+  clip-path: polygon(3% 0, 100% 0, 100% 68%, 96% 100%, 0 100%, 0 24%);
+}
+
+.services-overview__card:hover {
+  transform: translateX(0.45rem);
+  background: var(--green);
+  clip-path: polygon(0 12%, 92% 0, 100% 42%, 96% 100%, 6% 100%, 0 66%);
+}
+
+.services-overview__number {
+  color: rgba(0, 51, 102, 0.55);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+.services-overview__card h3 {
+  font-size: clamp(1.35rem, 3.2vw, 2.45rem);
+  line-height: 0.95;
+}
+
+.services-overview__card p {
+  max-width: 31rem;
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: clamp(0.82rem, 1.2vw, 0.98rem);
+  line-height: 1.22;
+}
+
+/* ---- Culture statement section ---- */
+.culture {
+  --culture-opacity: 0.1;
+  display: grid;
+  height: 100svh;
+  min-height: 100svh;
+  place-items: center;
+  padding: clamp(5rem, 7vw, 7rem) clamp(1.2rem, 6vw, 5rem);
+  background: var(--green);
+  color: var(--dark-blue);
+}
+
+.culture__text {
+  width: min(86rem, 94vw);
+  color: var(--dark-blue);
+  font-size: clamp(1.8rem, 3.8vw, 4.2rem);
+  line-height: 0.95;
+  text-align: center;
+  text-wrap: balance;
+  opacity: var(--culture-opacity);
+  transition: opacity 120ms linear;
+}
+
 /* ---- Work section (RPA-style) ---- */
 .work {
+  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
   background: #100c40;
   color: #fff;
   padding: clamp(2.6rem, 6vw, 5rem) clamp(1.6rem, 6vw, 5rem);
@@ -1158,6 +1341,18 @@ body.loaded #loaderWall {
   transform: translateY(0);
 }
 
+@keyframes caretBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes scrollCue {
+  50% {
+    transform: translateY(0.45rem);
+  }
+}
+
 @keyframes logoDrift {
   from {
     transform: translateX(0);
@@ -1199,6 +1394,10 @@ body.loaded #loaderWall {
   .project-grid,
   .news-grid {
     gap: 3rem;
+  }
+
+  .services-overview__card {
+    grid-template-columns: minmax(2.8rem, 0.18fr) minmax(12rem, 0.9fr) minmax(13rem, 1fr);
   }
 }
 
@@ -1267,8 +1466,29 @@ body.loaded #loaderWall {
     font-size: 3.3rem;
   }
 
+  .hero-typewriter {
+    width: min(32rem, 94vw);
+    font-size: clamp(2rem, 11vw, 4.4rem);
+    text-align: left;
+  }
+
   .hero-media {
     width: min(30rem, 98vw);
+  }
+
+  .scroll-indicator {
+    left: 0.75rem;
+    right: auto;
+  }
+
+  .culture {
+    padding: 5rem 0.75rem 2rem;
+  }
+
+  .culture__text {
+    width: min(33rem, 94vw);
+    font-size: clamp(1.35rem, 6.6vw, 2.35rem);
+    line-height: 1;
   }
 
   .about__statement p {
@@ -1292,6 +1512,36 @@ body.loaded #loaderWall {
     width: min(28rem, 96vw);
     padding: 1rem;
     text-align: center;
+  }
+
+  .services-overview {
+    padding: 5.5rem 0.75rem 3.5rem;
+  }
+
+  .services-overview__title-row {
+    display: block;
+  }
+
+  .services-overview__eyebrow {
+    display: block;
+    margin-top: 0.4rem;
+  }
+
+  .services-overview__grid {
+    gap: 0.55rem;
+  }
+
+  .services-overview__card {
+    min-height: auto;
+    grid-template-columns: 2.2rem 1fr;
+    gap: 0.3rem 0.75rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .services-overview__card p {
+    grid-column: 2;
+    margin-left: 0;
+    font-size: 0.76rem;
   }
 
   .project-grid,
