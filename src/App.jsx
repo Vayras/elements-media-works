@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import Cursor from "./components/Cursor.jsx";
 import Header from "./components/Header.jsx";
+import CaseStudiesSection from "./sections/CaseStudiesSection.jsx";
+import CaseStudyDetailSection from "./sections/CaseStudyDetailSection.jsx";
 import CultureSection from "./sections/CultureSection.jsx";
 import MenuPanel from "./components/MenuPanel.jsx";
 import Preloader from "./components/Preloader.jsx";
 import FooterSection from "./sections/FooterSection.jsx";
 import HeroSection from "./sections/HeroSection.jsx";
+import ImpactSection from "./sections/ImpactSection.jsx";
+import InternationalBrandsSection from "./sections/InternationalBrandsSection.jsx";
 import ServicesSection from "./sections/ServicesSection.jsx";
 import WorkSection from "./sections/WorkSection.jsx";
 
@@ -148,6 +152,25 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const updateCaseDetailState = () => {
+      const isCaseDetailOpen = Boolean(document.querySelector(".case-study-detail:target"));
+      document.body.classList.toggle("case-detail-open", isCaseDetailOpen);
+      document.documentElement.classList.toggle("case-detail-open", isCaseDetailOpen);
+    };
+
+    window.addEventListener("hashchange", updateCaseDetailState);
+    window.addEventListener("load", updateCaseDetailState);
+    updateCaseDetailState();
+
+    return () => {
+      window.removeEventListener("hashchange", updateCaseDetailState);
+      window.removeEventListener("load", updateCaseDetailState);
+      document.body.classList.remove("case-detail-open");
+      document.documentElement.classList.remove("case-detail-open");
+    };
+  }, []);
+
+  useEffect(() => {
     if (isMenuOpen) return undefined;
 
     let isSnapping = false;
@@ -165,15 +188,6 @@ function App() {
         }))
         .sort((a, b) => a.top - b.top);
 
-    const getCurrentSnapIndex = (snapPoints) => {
-      const currentTop = window.scrollY;
-      return snapPoints.reduce((nearestIndex, point, index) => {
-        const nearestDistance = Math.abs(snapPoints[nearestIndex].top - currentTop);
-        const pointDistance = Math.abs(point.top - currentTop);
-        return pointDistance < nearestDistance ? index : nearestIndex;
-      }, 0);
-    };
-
     const lockUntilScrollSettles = () => {
       isSnapping = true;
       window.clearTimeout(unlockTimer);
@@ -186,10 +200,14 @@ function App() {
       const snapPoints = getSnapPoints();
       if (!snapPoints.length) return;
 
-      const currentIndex = getCurrentSnapIndex(snapPoints);
-      const targetIndex = clamp(currentIndex + direction, 0, snapPoints.length - 1);
-      const target = snapPoints[targetIndex];
-      if (!target || targetIndex === currentIndex) return;
+      const currentTop = Math.round(window.scrollY);
+      const tolerance = 8;
+      const target =
+        direction > 0
+          ? snapPoints.find((point) => point.top > currentTop + tolerance)
+          : [...snapPoints].reverse().find((point) => point.top < currentTop - tolerance);
+
+      if (!target) return;
 
       lockUntilScrollSettles();
       window.scrollTo({ top: target.top, behavior: "smooth" });
@@ -205,6 +223,7 @@ function App() {
     };
 
     const handleWheel = (event) => {
+      if (document.body.classList.contains("side-panel-open") || document.body.classList.contains("case-detail-open")) return;
       if (Math.abs(event.deltaY) < 12 || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
       event.preventDefault();
 
@@ -224,7 +243,15 @@ function App() {
       const isPreviousKey = ["ArrowUp", "PageUp"].includes(event.key) || (event.key === " " && event.shiftKey);
       const isEdgeKey = ["Home", "End"].includes(event.key);
 
-      if (isTyping || event.metaKey || event.ctrlKey || event.altKey || (!isNextKey && !isPreviousKey && !isEdgeKey)) {
+      if (
+        isTyping ||
+        document.body.classList.contains("side-panel-open") ||
+        document.body.classList.contains("case-detail-open") ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.altKey ||
+        (!isNextKey && !isPreviousKey && !isEdgeKey)
+      ) {
         return;
       }
 
@@ -325,7 +352,11 @@ function App() {
         <HeroSection startTyping={!showPreloader} />
         <ServicesSection />
         <CultureSection />
+        <InternationalBrandsSection />
+        <ImpactSection />
         <WorkSection />
+        <CaseStudiesSection />
+        <CaseStudyDetailSection />
       </main>
       <FooterSection />
     </>

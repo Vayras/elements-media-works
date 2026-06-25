@@ -1,14 +1,11 @@
-const metaLinks = [
-  { href: "#services", label: "V 2.0 March 2024" },
-  { href: "#contact", label: "For Internal Uses Only" },
-  { href: "https://www.elementsmediaworks.com", label: "www.elementsmediaworks.com" },
-];
-
 const navLinks = [
   { href: "#top", label: "Home" },
   { href: "#services", label: "Services" },
   { href: "#culture", label: "Culture" },
+  { href: "#international-brands", label: "Brands" },
+  { href: "#impact", label: "Impact" },
   { href: "#projects", label: "Work" },
+  { href: "#case-studies", label: "Case Studies" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -22,18 +19,6 @@ function MenuPanel({ isOpen, onClose }) {
         if (event.target.closest("a")) onClose();
       }}
     >
-      <div className="menu-panel__extras">
-        <a className="lang-chip" href="https://www.elementsmediaworks.com">
-          EMW
-        </a>
-        <ul>
-          {metaLinks.map((link) => (
-            <li key={link.label}>
-              <a href={link.href}>{link.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
       <div className="menu-panel__shape">
         <div className="menu-panel__links">
           {navLinks.map((link) => (
