@@ -32,17 +32,16 @@ function ImpactSection() {
       className="section-block impact-section"
       id="impact"
       data-section-label="Impact"
-      data-section-color="#003366"
+      data-section-color="#FADA5E"
     >
       <div className="impact-section__inner">
         <div className="impact-section__head reveal">
-          <p>Our journey</p>
           <h2>We have come a long way</h2>
         </div>
 
         <div className="impact-stats" aria-label="Impact metrics">
           {impactStats.map((stat) => (
-            <article className="impact-stat reveal" key={stat.label}>
+            <article className="impact-stat" key={stat.label}>
               <strong>{stat.value}</strong>
               <span>{stat.label}</span>
             </article>

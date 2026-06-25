@@ -215,11 +215,24 @@ body.in-footer .site-header .brand {
 }
 
 .menu-toggle.is-open {
-  background: var(--red);
+  top: 1.15rem;
+  right: 1.35rem;
+  width: 5.2rem;
+  height: 5.2rem;
+  background: transparent;
+  clip-path: none;
+}
+
+.menu-toggle.is-open span {
+  left: 0.55rem;
+  top: 50%;
+  width: 4.1rem;
+  height: 4px;
+  background: var(--dark-blue);
 }
 
 .menu-toggle.is-open span:nth-child(1) {
-  transform: translateY(0.44rem) rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .menu-toggle.is-open span:nth-child(2) {
@@ -227,7 +240,7 @@ body.in-footer .site-header .brand {
 }
 
 .menu-toggle.is-open span:nth-child(3) {
-  transform: translateY(-0.44rem) rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 .menu-panel {
@@ -517,6 +530,7 @@ body.loaded #loaderWall {
 
 .wall-footer {
   color: var(--light-blue);
+  opacity: 0.2;
 }
 
 .hero {
@@ -1124,14 +1138,17 @@ body.loaded #loaderWall {
 
 .brand-solutions-drawer__close {
   position: absolute;
-  top: 1rem;
+  top: 0.8rem;
   right: 1rem;
   z-index: 4;
+  width: clamp(4.2rem, 6vw, 6.5rem);
+  height: clamp(4.2rem, 6vw, 6.5rem);
   border: 0;
-  padding: 0.8rem 1rem;
+  padding: 0;
   color: var(--dark-blue);
-  background: var(--yellow);
-  clip-path: polygon(0 0, 88% 0, 100% 42%, 100% 100%, 16% 100%, 0 68%);
+  background: transparent;
+  font-size: clamp(4rem, 7vw, 7rem);
+  line-height: 0.75;
   cursor: pointer;
 }
 
@@ -1201,8 +1218,9 @@ body.loaded #loaderWall {
 .brand-solutions__head {
   display: flex;
   align-items: end;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
+  padding-right: clamp(4.8rem, 7vw, 7rem);
 }
 
 .brand-solutions__head p {
@@ -1331,6 +1349,41 @@ body.loaded #loaderWall {
   text-wrap: balance;
   opacity: var(--culture-opacity);
   transition: opacity 120ms linear;
+}
+
+.culture__word {
+  position: relative;
+  display: inline-block;
+  margin-right: 0.18em;
+  isolation: isolate;
+}
+
+.culture__word::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.08em;
+  right: -0.08em;
+  top: 0.08em;
+  bottom: 0.02em;
+  background: var(--yellow);
+  opacity: 0;
+  transform: scaleX(0.2);
+  transform-origin: left center;
+  animation: cultureWordHighlight 7.5s linear infinite;
+  animation-delay: calc(var(--word-index) * 115ms);
+}
+
+@keyframes cultureWordHighlight {
+  0%, 3% {
+    opacity: 0.78;
+    transform: scaleX(1);
+  }
+
+  5%, 100% {
+    opacity: 0;
+    transform: scaleX(0.2);
+  }
 }
 
 /* ---- International brands section ---- */
@@ -1691,7 +1744,7 @@ body.loaded #loaderWall {
   min-height: 100svh;
   height: 100svh;
   overflow: hidden;
-  background: var(--green);
+  background: var(--pink);
   color: var(--dark-blue);
   padding: clamp(4.8rem, 6vw, 5.4rem) clamp(1rem, 5vw, 4.8rem) clamp(1.2rem, 3vw, 2.4rem);
   display: flex;
@@ -1704,11 +1757,9 @@ body.loaded #loaderWall {
 }
 
 .impact-section__head {
-  display: grid;
-  grid-template-columns: minmax(10rem, 0.28fr) 1fr;
-  align-items: end;
-  gap: clamp(1rem, 3vw, 2rem);
-  margin-bottom: clamp(1.2rem, 2.6vw, 2rem);
+  display: block;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+  transform: translateY(-1rem);
 }
 
 .impact-section__head p {
@@ -1721,38 +1772,73 @@ body.loaded #loaderWall {
 }
 
 .impact-section__head h2 {
-  font-size: clamp(2.35rem, 5.5vw, 5.6rem);
+  font-size: clamp(2.15rem, 4.9vw, 5.05rem);
   line-height: 0.9;
   letter-spacing: -0.06em;
   text-align: center;
   text-wrap: balance;
 }
 
+.impact-counter {
+  position: relative;
+  width: min(54rem, 100%);
+  margin: 0 auto clamp(0.7rem, 1.5vw, 1.1rem);
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.impact-counter::before {
+  display: none;
+}
+
+.impact-counter strong,
+.impact-counter span {
+  position: relative;
+  z-index: 1;
+}
+
+.impact-counter strong {
+  color: var(--yellow);
+  font-size: clamp(4.2rem, 12vw, 12rem);
+  line-height: 0.75;
+  letter-spacing: -0.08em;
+  animation: counterPop 170ms ease both;
+}
+
+.impact-counter span {
+  margin-top: 0.35rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.6vw, 1.4rem);
+  font-weight: 800;
+}
+
 .impact-stats {
+  width: min(74rem, 100%);
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(0.7rem, 2vw, 1.4rem) clamp(1rem, 3vw, 2.2rem);
+  gap: clamp(1.2rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.2rem);
+  opacity: 1;
+  transform: none;
+}
+
+.impact-section.is-complete .impact-stats {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .impact-stat {
   position: relative;
-  min-height: clamp(4rem, 9vh, 6.2rem);
-  padding: 0.45rem 0.6rem 0.45rem 1.25rem;
+  min-height: clamp(3.2rem, 7vh, 4.9rem);
+  padding: 0.35rem 0.6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .impact-stat::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: clamp(2.8rem, 5vw, 5.2rem);
-  height: clamp(1.45rem, 2.8vw, 2.5rem);
-  background: var(--yellow);
-  transform: translateY(-50%);
-  clip-path: polygon(0 0, 78% 0, 100% 42%, 100% 100%, 16% 100%, 0 72%);
+  display: none;
 }
 
 .impact-stat strong,
@@ -1762,7 +1848,8 @@ body.loaded #loaderWall {
 }
 
 .impact-stat strong {
-  font-size: clamp(2rem, 4.3vw, 4.8rem);
+  color: var(--yellow);
+  font-size: clamp(1.65rem, 3.4vw, 3.8rem);
   line-height: 0.82;
   letter-spacing: -0.06em;
 }
@@ -1775,14 +1862,22 @@ body.loaded #loaderWall {
 }
 
 .impact-logos {
-  margin-top: clamp(1.2rem, 3vw, 2.4rem);
-  padding-top: clamp(1rem, 2vw, 1.4rem);
+  margin-top: clamp(0.75rem, 1.8vw, 1.4rem);
+  padding-top: clamp(0.65rem, 1.4vw, 1rem);
   border-top: 2px dashed rgba(0, 51, 102, 0.36);
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: opacity 360ms ease 120ms, transform 360ms ease 120ms;
+}
+
+.impact-section.is-complete .impact-logos {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .impact-logos h3 {
-  margin-bottom: clamp(0.9rem, 1.8vw, 1.35rem);
-  font-size: clamp(1.35rem, 3vw, 3.2rem);
+  margin-bottom: clamp(0.65rem, 1.2vw, 0.9rem);
+  font-size: clamp(1.15rem, 2.4vw, 2.55rem);
   line-height: 0.9;
   text-align: center;
 }
@@ -1803,7 +1898,7 @@ body.loaded #loaderWall {
 .impact-logo {
   flex: 0 0 auto;
   width: clamp(7.4rem, 10vw, 12.5rem);
-  height: clamp(3.2rem, 6vh, 4.8rem);
+  height: clamp(2.8rem, 5vh, 4.3rem);
   display: inline-grid;
   place-items: center;
 }
@@ -1814,6 +1909,18 @@ body.loaded #loaderWall {
   object-fit: contain;
   filter: brightness(0) saturate(100%) invert(16%) sepia(50%) saturate(1776%) hue-rotate(188deg) brightness(88%) contrast(98%);
   opacity: 0.98;
+}
+
+@keyframes counterPop {
+  from {
+    opacity: 0;
+    transform: translateY(0.18em) scale(0.92) rotate(-1deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
 }
 
 @keyframes impactLogoDrift {
