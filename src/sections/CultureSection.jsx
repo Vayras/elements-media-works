@@ -6,7 +6,7 @@ const cultureWords = cultureCopy.split(" ");
 function CultureSection() {
   return (
     <section
-      className="section-block culture surface-blue"
+      className="section-block culture "
       id="culture"
       data-section-label="Culture"
       data-section-color="#003366"

@@ -125,12 +125,12 @@ function ServicesSection() {
     >
       <div className="services-overview__inner">
         <div className="services-overview__head reveal">
-          <span className="services-overview__note" aria-hidden="true"></span>
+
         </div>
 
         <div className="services-overview__title-row reveal">
           <h2 className="services-overview__title">Our Services</h2>
-          <span className="services-overview__eyebrow">Span Across</span>
+
         </div>
 
         <div className="services-overview__grid" aria-label="Services categories">

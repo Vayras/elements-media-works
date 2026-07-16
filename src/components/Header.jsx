@@ -1,8 +1,10 @@
+import Logo from "./Logo";
+
 function Header({ isMenuOpen, onMenuToggle }) {
   return (
     <header className="site-header" aria-label="Main navigation">
       <a className="brand" href="#top" aria-label="EMW home">
-        EMW
+        <Logo className="emw-logo" />
       </a>
       <button
         className={`menu-toggle${isMenuOpen ? " is-open" : ""}`}

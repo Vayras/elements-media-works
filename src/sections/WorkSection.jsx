@@ -22,11 +22,11 @@ function WorkSection() {
       className="section-block work surface-blue"
       id="projects"
       data-section-label="Work"
-      data-section-color="#ff2e93"
+      data-section-color="#AD2754"
     >
       <div className="work__inner">
         <div className="work__head">
-          <span className="work__note" aria-hidden="true"></span>
+
         </div>
         <div className="work__title-row">
           <h2 className="work__title">Work</h2>

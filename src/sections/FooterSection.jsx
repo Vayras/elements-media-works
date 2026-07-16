@@ -1,13 +1,10 @@
-import EmwWall from "../components/EmwWall.jsx";
+import Logo from "../components/Logo.jsx";
 
 const footerLinks = [
-  { href: "#top", label: "Elements Mediaworks" },
+  { href: "#top", label: "Elements Media Works" },
   { href: "#top", label: "Brand Identity & Guidelines" },
-  { href: "#services", label: "V 2.0 March 2024" },
-  { href: "#contact", label: "For Internal Uses Only" },
 ];
 
-const traits = ["GO-GETTER", "INNOVATOR", "RISK-TAKER", "LEADER"];
 
 function FooterSection() {
   return (
@@ -15,7 +12,7 @@ function FooterSection() {
       className="section-block site-footer surface-blue"
       id="contact"
       data-section-label="Contact"
-      data-section-color="#54AD27"
+      data-section-color="#AD2754"
     >
       <div className="footer-top">
         <ul>
@@ -33,30 +30,21 @@ function FooterSection() {
           <a href="mailto:shashwat@elementsmediaworks.com">shashwat@elementsmediaworks.com</a>
           <a href="mailto:jaymin@elementsmediaworks.com">jaymin@elementsmediaworks.com</a>
         </address>
-        <ul className="footer-social">
-          {traits.map((trait) => (
-            <li key={trait}>
-              <a href="#services">{trait}</a>
-            </li>
-          ))}
-        </ul>
+
       </div>
 
       <div className="footer-wall">
-        <EmwWall className="wall-footer" rows={8} />
+        {/* Wall removed as requested */}
         <a className="contact-blob" href="mailto:shashwat@elementsmediaworks.com">
           <span>Contact</span>
           <span>E-MAIL</span>
-          <strong>EMW</strong>
+          <strong aria-label="EMW">
+            <Logo className="emw-logo" />
+          </strong>
         </a>
       </div>
 
-      <div className="footer-bottom">
-        <a className="brand brand--footer" href="#top">
-          EMW
-        </a>
-        <span>V 2.0 March 2024</span>
-      </div>
+      <div className="footer-bottom"></div>
     </footer>
   );
 }

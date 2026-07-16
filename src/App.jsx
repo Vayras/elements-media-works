@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Cursor from "./components/Cursor.jsx";
 import Header from "./components/Header.jsx";
 import CaseStudiesSection from "./sections/CaseStudiesSection.jsx";
 import CaseStudyDetailSection from "./sections/CaseStudyDetailSection.jsx";
@@ -108,11 +107,26 @@ function App() {
       cultureSection.style.setProperty("--culture-opacity", opacity.toFixed(3));
     };
 
+    const sectionContrastColors = {
+      "#003366": "#FADA5E",
+      "#FADA5E": "#003366",
+      "#AD2754": "#FADA5E",
+    };
+
     const applySectionState = (section) => {
       if (!section) return;
 
-      const { sectionColor: color } = section.dataset;
-      if (color) root.style.setProperty("--live-color", color);
+      const { sectionColor: color, sectionSurface: surface = "dark" } = section.dataset;
+      if (color) {
+        const normalizedColor = color.toUpperCase();
+        const contrast = sectionContrastColors[normalizedColor] ?? "#FADA5E";
+        const flipToggle = surface === "light";
+
+        root.style.setProperty("--live-color", color);
+        root.style.setProperty("--live-contrast", contrast);
+        root.style.setProperty("--header-toggle-bg", flipToggle ? contrast : color);
+        root.style.setProperty("--header-toggle-icon", flipToggle ? color : contrast);
+      }
       body.classList.toggle("in-footer", section.classList.contains("site-footer"));
     };
 
@@ -305,33 +319,7 @@ function App() {
     return () => revealObserver.disconnect();
   }, []);
 
-  useEffect(() => {
-    const cursor = document.querySelector(".cursor");
-    if (!cursor || !window.matchMedia("(pointer: fine)").matches) return undefined;
 
-    const moveCursor = (event) => {
-      cursor.style.left = `${event.clientX}px`;
-      cursor.style.top = `${event.clientY}px`;
-    };
-
-    const handleEnter = () => cursor.classList.add("is-hovering");
-    const handleLeave = () => cursor.classList.remove("is-hovering");
-    const interactiveItems = document.querySelectorAll("a, button");
-
-    window.addEventListener("mousemove", moveCursor);
-    interactiveItems.forEach((item) => {
-      item.addEventListener("mouseenter", handleEnter);
-      item.addEventListener("mouseleave", handleLeave);
-    });
-
-    return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      interactiveItems.forEach((item) => {
-        item.removeEventListener("mouseenter", handleEnter);
-        item.removeEventListener("mouseleave", handleLeave);
-      });
-    };
-  }, []);
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -345,7 +333,7 @@ function App() {
   return (
     <>
       {showPreloader && <Preloader progress={preloaderProgress} />}
-      <Cursor />
+
       <Header isMenuOpen={isMenuOpen} onMenuToggle={() => setIsMenuOpen((isOpen) => !isOpen)} />
       <MenuPanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       <main>

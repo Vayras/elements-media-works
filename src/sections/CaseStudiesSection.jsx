@@ -1,15 +1,4 @@
-const caseStudies = [
-  "Keep Girls In School 5th Edition",
-  "ARQ by The Leela",
-  "#PlayLikeMumbai for Mumbai Indians",
-  "Heineken @ Coachella & UEFA",
-  "Vivienne Westwood",
-  "Brand Building: TIRA",
-  "Long Term Partnership: AJIO",
-  "Journey With Johnnie Walker",
-  "Jio World Plaza & NMACC Launch",
-  "The Launch of Vantara",
-];
+import caseStudies from "../data/caseStudies.js";
 
 function CaseStudiesSection() {
   return (
@@ -17,7 +6,8 @@ function CaseStudiesSection() {
       className="section-block case-studies"
       id="case-studies"
       data-section-label="Case Studies"
-      data-section-color="#FADA5E"
+      data-section-color="#003366"
+      data-section-surface="light"
     >
       <div className="case-studies__inner">
         <div className="case-studies__side reveal" aria-hidden="true">
@@ -26,25 +16,19 @@ function CaseStudiesSection() {
 
         <div className="case-studies__content">
           <div className="case-studies__grid" aria-label="Case studies">
-            {caseStudies.map((title, index) => {
-              const isAvailable = index === 0;
-              const CardTag = isAvailable ? "a" : "article";
-
-              return (
-                <CardTag
-                  className={`case-study-card reveal${isAvailable ? " case-study-card--link" : ""}`}
-                  href={isAvailable ? "#keep-girls-case-study" : undefined}
-                  key={title}
-                >
-                  <div className="case-study-card__mark" aria-hidden="true">
-                    <span>{index + 1}</span>
-                  </div>
-                  <h3>{title}</h3>
-                </CardTag>
-              );
-            })}
+            {caseStudies.map((study, index) => (
+              <a
+                className="case-study-card reveal case-study-card--link"
+                href={`#${study.id}`}
+                key={study.id}
+              >
+                <div className="case-study-card__mark" aria-hidden="true">
+                  <span>{index + 1}</span>
+                </div>
+                <h3>{study.title}</h3>
+              </a>
+            ))}
           </div>
-
         </div>
       </div>
     </section>

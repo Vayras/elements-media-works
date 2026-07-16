@@ -38,7 +38,6 @@ function ImpactSection() {
         <div className="impact-section__head reveal">
           <h2>We have come a long way</h2>
         </div>
-
         <div className="impact-stats" aria-label="Impact metrics">
           {impactStats.map((stat) => (
             <article className="impact-stat" key={stat.label}>

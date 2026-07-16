@@ -9,7 +9,7 @@ function AboutSection() {
       <div className="about__statement">
         <p>
           Through all of this, one thing has remained constant: we love making
-          the impossible happen.
+          the impossible happen. 
         </p>
       </div>
       <div className="about__lower">

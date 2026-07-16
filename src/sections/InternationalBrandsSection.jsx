@@ -100,6 +100,7 @@ function InternationalBrandsSection() {
       id="international-brands"
       data-section-label="International Brands"
       data-section-color="#003366"
+      data-section-surface="light"
     >
       <div className="international-brands__inner">
         <div className="international-brands__copy reveal">

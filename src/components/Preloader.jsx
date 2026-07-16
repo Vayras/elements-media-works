@@ -1,15 +1,20 @@
-import EmwWall from "./EmwWall.jsx";
 
 function Preloader({ progress }) {
   return (
     <div className="preloader" id="preloader" aria-hidden="true">
-      <EmwWall className="wall-blue" id="loaderWall" rows={10} />
-      <div className="loader__percent">
-        <div className="loader-shape">
-          <span>{progress}%</span>
-        </div>
+      <div className="loader__logo-container">
+        <img 
+          src="/assets/watermarks/100%25%20yellow.svg" 
+          alt="" 
+          className="loader__logo-base" 
+        />
+        <img 
+          src="/assets/watermarks/100%25%20yellow.svg" 
+          alt="" 
+          className="loader__logo-fill" 
+          style={{ clipPath: `inset(calc(100% - ${progress}%) 0 0 0)` }}
+        />
       </div>
-      <div className="loader__progress" style={{ width: `${progress}%` }} />
     </div>
   );
 }
