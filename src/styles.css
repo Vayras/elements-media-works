@@ -1317,12 +1317,14 @@ body.loaded #loaderWall {
 /* ---- Culture statement section ---- */
 .culture {
   --culture-opacity: 0.1;
+  position: relative;
   display: grid;
   height: 100svh;
   min-height: 100svh;
   place-items: center;
   padding: clamp(5rem, 7vw, 7rem) clamp(1.2rem, 6vw, 5rem);
   background: var(--yellow);
+  overflow: hidden;
 }
 
 .culture__text {
@@ -1357,6 +1359,58 @@ body.loaded #loaderWall {
   transform-origin: left center;
   animation: cultureWordHighlight 7.5s linear infinite;
   animation-delay: calc(var(--word-index) * 115ms);
+}
+
+.culture__lens {
+  --lens-size: clamp(8rem, 13vw, 11rem);
+  position: absolute;
+  z-index: 2;
+  left: var(--lens-x, 50%);
+  top: var(--lens-y, 50%);
+  width: var(--lens-size);
+  height: var(--lens-size);
+  overflow: hidden;
+  border: 2px solid rgba(0, 51, 102, 0.7);
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0.7rem 2.2rem rgba(0, 51, 102, 0.18), inset 0 0 1.2rem rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.82);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.culture__lens.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.culture__lens-copy {
+  position: absolute;
+  left: var(--copy-left);
+  top: var(--copy-top);
+  width: var(--copy-width);
+  max-width: none;
+  margin: 0;
+  opacity: 1;
+  transform: scale(1.42);
+  transform-origin: var(--origin-x) var(--origin-y);
+}
+
+.culture__lens-copy .culture__word::before {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .culture {
+    cursor: none;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .culture__lens {
+    display: none;
+  }
 }
 
 @keyframes cultureWordHighlight {
@@ -1451,277 +1505,15 @@ body.loaded #loaderWall {
   display: none;
 }
 
-.brand-logo > span,
-.brand-logo > small {
-  position: relative;
-  z-index: 1;
+.brand-logo img {
+  width: min(100%, 12rem);
+  height: clamp(2.1rem, 5.2vh, 3.6rem);
+  object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
-.logo-ab__initials {
-  color: var(--pink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.95rem, 3vw, 3rem);
-  line-height: 0.78;
-}
-
-.logo-ab__name {
-  color: var(--pink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(0.78rem, 1vw, 1.04rem);
-}
-
-.logo-yttp__seal {
-  width: 2.55rem;
-  height: 2.55rem;
-  display: grid;
-  place-items: center;
-  border: 2px solid var(--dark-blue);
-  border-radius: 50%;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: -0.08em;
-}
-
-.logo-yttp__name {
-  font-family: var(--font-body);
-  font-size: clamp(0.82rem, 1.1vw, 1rem);
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.logo-yttp__name small,
-.logo-allies__name small,
-.brand-logo--fenty small,
-.brand-logo--canali small,
-.brand-logo--mermade small {
-  font-size: 0.62em;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-}
-
-.logo-blessed__house {
-  position: relative;
-  min-width: 8.3rem;
-  padding: 0.72rem 0.85rem 0.5rem;
-  border: 2px solid var(--dark-blue);
-  border-radius: 0.85rem 0.85rem 0.45rem 0.45rem;
-  color: var(--dark-blue);
-  font-family: "Comic Sans MS", "Bradley Hand", cursive;
-  font-size: clamp(0.84rem, 1.1vw, 1rem);
-  text-transform: uppercase;
-}
-
-.logo-blessed__house::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: -1.05rem;
-  width: 4.9rem;
-  height: 4.9rem;
-  border-top: 2px solid var(--dark-blue);
-  border-left: 2px solid var(--dark-blue);
-  transform: translateX(-50%) rotate(45deg);
-  border-radius: 0.35rem;
-  z-index: -1;
-}
-
-.logo-allies__symbol {
-  position: relative;
-  width: 4.2rem;
-  height: 3.25rem;
-}
-
-.logo-allies__symbol::before {
-  content: "";
-  position: absolute;
-  inset: 0.25rem 0.5rem 0.45rem;
-  border-left: 2px solid var(--dark-blue);
-  border-bottom: 2px solid var(--dark-blue);
-  transform: skewX(-30deg) rotate(30deg);
-}
-
-.logo-allies__symbol i {
-  position: absolute;
-  width: 0.72rem;
-  height: 0.72rem;
-  border: 2px solid var(--dark-blue);
-  border-radius: 50%;
-  background: #fff;
-}
-
-.logo-allies__symbol i:nth-child(1) {
-  left: 0.1rem;
-  bottom: 0.12rem;
-}
-
-.logo-allies__symbol i:nth-child(2) {
-  right: 0.1rem;
-  bottom: 0.12rem;
-}
-
-.logo-allies__symbol i:nth-child(3) {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.logo-allies__name {
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.brand-logo--huda {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: clamp(1.25rem, 2.1vw, 2.15rem);
-  font-weight: 200;
-  letter-spacing: -0.08em;
-  text-transform: uppercase;
-}
-
-.brand-logo--huda span span {
-  color: var(--pink);
-}
-
-.brand-logo--laura,
-.brand-logo--tomford,
-.brand-logo--shein,
-.brand-logo--asos {
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 900;
-  letter-spacing: -0.08em;
-  text-transform: uppercase;
-}
-
-.brand-logo--laura {
-  font-size: clamp(1.05rem, 1.7vw, 1.55rem);
-}
-
-.brand-logo--tods span {
-  padding: 0.34rem 1.25rem 0.28rem;
-  border: 2px double var(--dark-blue);
-  border-radius: 50%;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.15rem, 1.8vw, 1.75rem);
-}
-
-.brand-logo--milktouch {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: clamp(1.45rem, 2.4vw, 2.2rem);
-  font-weight: 300;
-  letter-spacing: -0.05em;
-}
-
-.brand-logo--fenty {
-  font-family: var(--font-body);
-  font-size: clamp(1.1rem, 1.7vw, 1.55rem);
-  font-weight: 900;
-  letter-spacing: 0.17em;
-  line-height: 0.85;
-  text-transform: uppercase;
-}
-
-.brand-logo--fenty small,
-.brand-logo--canali small {
-  display: block;
-  margin-top: 0.28rem;
-}
-
-.brand-logo--tiffany,
-.brand-logo--valentino,
-.brand-logo--canali,
-.brand-logo--estee {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.22rem, 2vw, 2rem);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.logo-valentino__v {
-  width: 2.45rem;
-  height: 1.15rem;
-  display: grid;
-  place-items: center;
-  border: 1.5px solid var(--dark-blue);
-  border-radius: 50%;
-  font-size: 0.86rem;
-  line-height: 1;
-}
-
-.brand-logo--nars span {
-  min-width: 10.6rem;
-  padding: 0.62rem 1.2rem 0.5rem;
-  background: var(--dark-blue);
-  color: var(--yellow);
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: clamp(1.18rem, 2vw, 1.9rem);
-  font-weight: 600;
-  letter-spacing: 0.34em;
-}
-
-.brand-logo--tomford,
-.brand-logo--shein {
-  font-size: clamp(1.25rem, 2vw, 2rem);
-  letter-spacing: 0.13em;
-}
-
-.brand-logo--armani {
-  font-family: "Arial Narrow", Helvetica, Arial, sans-serif;
-  font-size: clamp(1.35rem, 2.1vw, 2.05rem);
-  font-stretch: condensed;
-  letter-spacing: -0.12em;
-  text-transform: uppercase;
-}
-
-.brand-logo--asos {
-  font-size: clamp(1.55rem, 2.6vw, 2.5rem);
-  letter-spacing: -0.13em;
-  text-transform: lowercase;
-}
-
-.brand-logo--mermade {
-  color: var(--pink);
-  font-family: "Brush Script MT", "Segoe Script", cursive;
-  font-size: clamp(1.55rem, 2.4vw, 2.35rem);
-  line-height: 0.82;
-}
-
-.brand-logo--mermade small {
-  font-family: var(--font-body);
-  letter-spacing: -0.03em;
-  text-transform: lowercase;
-}
-
-.brand-logo--canali {
-  line-height: 0.9;
-}
-
-.brand-logo--lamer span {
-  position: relative;
-  color: var(--pink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.45rem, 2.4vw, 2.35rem);
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.brand-logo--lamer span::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: -1.15rem;
-  right: -1.15rem;
-  top: 0.22rem;
-  bottom: 0.1rem;
-  background: var(--yellow);
-  clip-path: polygon(0 24%, 13% 10%, 30% 18%, 43% 0, 60% 18%, 79% 6%, 100% 24%, 92% 74%, 68% 65%, 46% 86%, 22% 70%, 4% 92%);
-}
-
-.brand-logo--estee {
-  font-size: clamp(1.06rem, 1.7vw, 1.55rem);
+.brand-logo img[src$=".svg"] {
+  filter: brightness(0) saturate(100%) invert(16%) sepia(50%) saturate(1776%) hue-rotate(188deg) brightness(88%) contrast(98%);
 }
 
 /* ---- Impact / trust section ---- */
