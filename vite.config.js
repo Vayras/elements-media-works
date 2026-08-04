@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: command === "build" ? "/RPA-CLONE/" : "/",
+  base: command === "build" ? "/elements-media-works/" : "/",
 }));
