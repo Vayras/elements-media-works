@@ -1,7 +1,7 @@
 import Logo from "../components/Logo.jsx";
 
 const footerLinks = [
-  { href: "#top", label: "Elements Media Works" },
+  { href: "#top", label: "ELEMENTS MEDIA WORKS" },
   { href: "#top", label: "Brand Identity & Guidelines" },
 ];
 
@@ -38,7 +38,7 @@ function FooterSection() {
         <a className="contact-blob" href="mailto:shashwat@elementsmediaworks.com">
           <span>Contact</span>
           <span>E-MAIL</span>
-          <strong aria-label="EMW">
+          <strong aria-label="EMW, ELEMENTS MEDIA WORKS">
             <Logo className="emw-logo" />
           </strong>
         </a>

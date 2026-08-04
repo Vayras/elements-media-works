@@ -3,7 +3,7 @@ import Logo from "./Logo";
 function Header({ isMenuOpen, onMenuToggle }) {
   return (
     <header className="site-header" aria-label="Main navigation">
-      <a className="brand" href="#top" aria-label="EMW home">
+      <a className="brand" href="#top" aria-label="EMW, ELEMENTS MEDIA WORKS home">
         <Logo className="emw-logo" />
       </a>
       <button
