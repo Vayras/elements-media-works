@@ -1370,10 +1370,11 @@ body.loaded #loaderWall {
   width: var(--lens-size);
   height: var(--lens-size);
   overflow: hidden;
-  border: 2px solid rgba(0, 51, 102, 0.7);
   border-radius: 50%;
   background: var(--yellow);
-  box-shadow: 0 0.7rem 2.2rem rgba(0, 51, 102, 0.18), inset 0 0 1.2rem rgba(255, 255, 255, 0.5);
+  -webkit-mask-image: radial-gradient(circle, #000 0 68%, rgba(0, 0, 0, 0.82) 77%, rgba(0, 0, 0, 0.35) 89%, transparent 100%);
+  mask-image: radial-gradient(circle, #000 0 68%, rgba(0, 0, 0, 0.82) 77%, rgba(0, 0, 0, 0.35) 89%, transparent 100%);
+  filter: drop-shadow(0 0.7rem 1.4rem rgba(0, 51, 102, 0.16));
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0.82);

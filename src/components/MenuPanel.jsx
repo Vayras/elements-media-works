@@ -1,3 +1,5 @@
+import { asset } from "../asset";
+
 const navLinks = [
   { href: "#top", label: "Home" },
   { href: "#services", label: "Services" },
@@ -27,7 +29,7 @@ function MenuPanel({ isOpen, onClose }) {
             </a>
           ))}
         </div>
-        <img src="/assets/images/contacto.gif" alt="" />
+        <img src={asset("assets/images/contacto.gif")} alt="" />
       </div>
     </nav>
   );

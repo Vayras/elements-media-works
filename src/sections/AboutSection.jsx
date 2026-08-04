@@ -1,3 +1,5 @@
+import { asset } from "../asset";
+
 function AboutSection() {
   return (
     <section
@@ -25,7 +27,7 @@ function AboutSection() {
         </div>
         <a className="brand-feature reveal" href="#projects" aria-label="Our Work">
           <span>Our Work</span>
-          <img src="/assets/images/image-video.webp" alt="" />
+          <img src={asset("assets/images/image-video.webp")} alt="" />
         </a>
       </div>
     </section>

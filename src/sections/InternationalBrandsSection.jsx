@@ -1,4 +1,6 @@
-const logoPath = "/assets/logos/international/";
+import { asset } from "../asset";
+
+const logoPath = asset("assets/logos/international/");
 
 const launchBrands = [
   ["Augustinus Bader", "augustinus-bader.svg"],

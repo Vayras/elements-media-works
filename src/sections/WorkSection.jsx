@@ -1,18 +1,20 @@
+import { asset } from "../asset";
+
 const workItems = [
   {
-    image: "/assets/images/socias.webp",
-    title: "Valentino",
-    category: "Valentino",
+    image: asset("assets/images/work/hamleys.webp"),
+    title: "Hamleys Holiday",
+    category: "Campaign",
   },
   {
-    image: "/assets/images/jierzum.webp",
-    title: "The Kollective",
-    category: "Events",
+    image: asset("assets/images/work/stevemaiden.webp"),
+    title: "Steve Madden",
+    category: "Campaign",
   },
   {
-    image: "/assets/images/openbank-222.webp",
-    title: "Mahou Xmas Fest",
-    category: "Mahou",
+    image: asset("assets/images/work/superdry.webp"),
+    title: "Superdry Sport",
+    category: "Campaign",
   },
 ];
 
@@ -25,14 +27,8 @@ function WorkSection() {
       data-section-color="#AD2754"
     >
       <div className="work__inner">
-        <div className="work__head">
-
-        </div>
         <div className="work__title-row">
           <h2 className="work__title">Work</h2>
-          <a className="work__seeall" href="#contact">
-            : View all
-          </a>
         </div>
 
         <div className="work-grid">

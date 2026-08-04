@@ -1,2 +1,5 @@
 node_modules/
 dist/
+
+# Source work images (site uses .webp)
+public/assets/images/work/*.png

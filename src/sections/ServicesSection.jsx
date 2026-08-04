@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { asset } from "../asset";
 
 const serviceItems = [
   {
@@ -32,27 +33,27 @@ const serviceItems = [
 const brandSolutionItems = [
   {
     title: "Digital",
-    image: "/assets/images/tendencias.webp",
+    image: asset("assets/images/tendencias.webp"),
     items: ["Influencers & KOLs", "UGC & Content Seeding", "Meme Marketing", "Amplification & Speed ORM"],
   },
   {
     title: "Events",
-    image: "/assets/images/openbank-222-alt.webp",
+    image: asset("assets/images/openbank-222-alt.webp"),
     items: ["Sponsorships", "Strategy and Execution", "Culture & Lifestyle Collabs"],
   },
   {
     title: "Music",
-    image: "/assets/images/detail-07.webp",
+    image: asset("assets/images/detail-07.webp"),
     items: ["Live Concerts", "Sponsorships", "Original Composition"],
   },
   {
     title: "Sports",
-    image: "/assets/images/openbank.webp",
+    image: asset("assets/images/openbank.webp"),
     items: ["League Sponsorships", "Team Sponsorships", "Athlete Endorsements"],
   },
   {
     title: "Films",
-    image: "/assets/images/image-video.webp",
+    image: asset("assets/images/image-video.webp"),
     items: ["In-film branding", "Co-branded Tie-ups", "Licensing & Merch"],
   },
 ];

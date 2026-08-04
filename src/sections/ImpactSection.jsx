@@ -1,3 +1,5 @@
+import { asset } from "../asset";
+
 const impactStats = [
   { value: "12+", label: "Years" },
   { value: "450+", label: "Brands" },
@@ -10,18 +12,18 @@ const impactStats = [
 ];
 
 const brandLogos = [
-  { name: "Vodafone", src: "/assets/logos/vodafone.svg" },
-  { name: "Siemens", src: "/assets/logos/siemens.svg" },
-  { name: "Santander", src: "/assets/logos/santander.svg" },
-  { name: "Sanitas", src: "/assets/logos/sanitas.svg" },
-  { name: "DIA", src: "/assets/logos/dia.svg" },
-  { name: "Burger King", src: "/assets/logos/burger-king.svg" },
-  { name: "L'Oréal", src: "/assets/logos/loreal.svg" },
-  { name: "Repsol", src: "/assets/logos/repsol.svg" },
-  { name: "Fresenius", src: "/assets/logos/fresenius.svg" },
-  { name: "Mahou", src: "/assets/logos/logo1.svg" },
-  { name: "Meta", src: "/assets/logos/logo2.svg" },
-  { name: "BBVA", src: "/assets/logos/logo3.svg" },
+  { name: "Vodafone", src: asset("assets/logos/vodafone.svg") },
+  { name: "Siemens", src: asset("assets/logos/siemens.svg") },
+  { name: "Santander", src: asset("assets/logos/santander.svg") },
+  { name: "Sanitas", src: asset("assets/logos/sanitas.svg") },
+  { name: "DIA", src: asset("assets/logos/dia.svg") },
+  { name: "Burger King", src: asset("assets/logos/burger-king.svg") },
+  { name: "L'Oréal", src: asset("assets/logos/loreal.svg") },
+  { name: "Repsol", src: asset("assets/logos/repsol.svg") },
+  { name: "Fresenius", src: asset("assets/logos/fresenius.svg") },
+  { name: "Mahou", src: asset("assets/logos/logo1.svg") },
+  { name: "Meta", src: asset("assets/logos/logo2.svg") },
+  { name: "BBVA", src: asset("assets/logos/logo3.svg") },
 ];
 
 function ImpactSection() {
