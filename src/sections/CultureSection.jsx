@@ -13,9 +13,13 @@ function CultureSection() {
   const moveLens = (event) => {
     if (event.pointerType === "touch") return;
 
+    const lens = lensRef.current;
+    const overWord = event.target.closest(".culture__word");
+    lens.classList.toggle("is-visible", Boolean(overWord));
+    if (!overWord) return;
+
     const section = sectionRef.current.getBoundingClientRect();
     const text = textRef.current.getBoundingClientRect();
-    const lens = lensRef.current;
     const x = event.clientX - section.left;
     const y = event.clientY - section.top;
     const radius = lens.offsetWidth / 2;
@@ -36,11 +40,7 @@ function CultureSection() {
       data-section-label="Culture"
       data-section-color="#003366"
       ref={sectionRef}
-      onPointerEnter={(event) => {
-        if (event.pointerType === "touch") return;
-        lensRef.current.classList.add("is-visible");
-        moveLens(event);
-      }}
+      onPointerEnter={moveLens}
       onPointerMove={moveLens}
       onPointerLeave={() => lensRef.current.classList.remove("is-visible")}
     >
