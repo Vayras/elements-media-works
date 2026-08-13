@@ -1773,6 +1773,16 @@ body.loaded #loaderWall {
   gap: 1rem;
 }
 
+.work__title-row--ig {
+  margin-top: 3rem;
+}
+
+.work__subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: var(--pink);
+}
+
 .work-card__media {
   overflow: hidden;
 }
