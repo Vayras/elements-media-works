@@ -1621,23 +1621,35 @@ body.loaded #loaderWall {
 /* ---- Work section ---- */
 .work {
   box-sizing: border-box;
-  min-height: 100svh;
-  height: 100svh;
-  overflow: hidden;
+  min-height: 200svh;
+  height: auto;
+  overflow: visible;
   background: var(--dark-blue);
   color: var(--yellow);
-  padding: 5.2rem clamp(1.2rem, 4vw, 3rem) clamp(0.9rem, 1.8vw, 1.4rem);
+  padding: calc(5.2rem + clamp(2rem, 5vh, 4rem)) clamp(1.2rem, 4vw, 3rem)
+    clamp(1rem, 2vh, 2rem);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .work__inner {
   width: min(96rem, 100%);
-  flex: 1;
-  min-height: 0;
+  min-height: calc(200svh - 5.2rem - clamp(2rem, 5vh, 4rem) - clamp(1rem, 2vh, 2rem));
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.work__snap {
+  position: absolute;
+  top: 100svh;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
 }
 
 .work__head {
@@ -1678,15 +1690,13 @@ body.loaded #loaderWall {
 }
 
 .work-grid {
-  --work-gap: clamp(0.65rem, 1vw, 0.9rem);
+  --work-gap: clamp(0.85rem, 1.5vw, 1.35rem);
   --work-tile: min(
     calc((100% - 2 * var(--work-gap)) / 3),
-    calc((100svh - 20rem) / 3 - 2.4rem)
+    calc((100svh - 15rem) / 2)
   );
-  flex: 1;
-  min-height: 0;
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
-  padding-top: clamp(1rem, 2vw, 1.75rem);
+  flex: 0 0 auto;
+  margin-top: clamp(2rem, 4vh, 3.5rem);
   display: grid;
   grid-template-columns: repeat(3, var(--work-tile));
   grid-template-rows: repeat(3, auto);
@@ -1729,17 +1739,17 @@ body.loaded #loaderWall {
 }
 
 .work-card h3 {
-  margin-top: 0.4rem;
+  margin-top: 0.55rem;
   font-family: var(--font-display);
-  font-size: clamp(0.84rem, 1.1vw, 1rem);
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
   line-height: 1.05;
   color: var(--pink);
 }
 
 .work-card p {
-  margin-top: 0.06rem;
+  margin-top: 0.12rem;
   padding-bottom: 0.1rem;
-  font-size: clamp(0.74rem, 0.88vw, 0.82rem);
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
   line-height: 1.05;
   color: var(--yellow);
 }

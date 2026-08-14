@@ -192,15 +192,25 @@ function App() {
     let lastWheelTime = 0;
     const snapDuration = 900;
 
-    const getSnapPoints = () =>
-      [...document.querySelectorAll(".section-block[data-section-label]")]
-        .map((section) => ({
+    const getSnapPoints = () => {
+      const points = [];
+
+      [...document.querySelectorAll(".section-block[data-section-label]")].forEach((section) => {
+        points.push({
           id: section.id,
-          // Use the element's natural document position. getBoundingClientRect()
-          // changes while sticky sections are pinned and can cause half-section snaps.
           top: Math.round(section.offsetTop),
-        }))
-        .sort((a, b) => a.top - b.top);
+        });
+
+        section.querySelectorAll("[data-snap-anchor]").forEach((anchor) => {
+          points.push({
+            id: `${section.id}-${anchor.dataset.snapAnchor ?? "anchor"}`,
+            top: Math.round(section.offsetTop + anchor.offsetTop),
+          });
+        });
+      });
+
+      return points.sort((a, b) => a.top - b.top);
+    };
 
     const lockUntilScrollSettles = () => {
       isSnapping = true;

@@ -66,6 +66,7 @@ function WorkSection() {
       data-section-label="Work"
       data-section-color="#AD2754"
     >
+      <div className="work__snap" data-snap-anchor="mid" aria-hidden="true" />
       <div className="work__inner">
         <div className="work__title-row">
           <h2 className="work__title">Work</h2>
