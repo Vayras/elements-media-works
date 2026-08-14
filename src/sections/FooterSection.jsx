@@ -1,9 +1,6 @@
 import Logo from "../components/Logo.jsx";
 
-const footerLinks = [
-  { href: "#top", label: "ELEMENTS MEDIA WORKS" },
-  { href: "#top", label: "Brand Identity & Guidelines" },
-];
+const footerLinks = [{ href: "#top", label: "ELEMENTS MEDIA WORKS" }];
 
 
 function FooterSection() {
