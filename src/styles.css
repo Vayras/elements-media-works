@@ -1540,8 +1540,9 @@ body.loaded #loaderWall {
 }
 
 .impact-logos {
-  margin-top: clamp(2.5rem, 12vw, 12.5rem);
+  margin-top: clamp(2.5rem, 5vw, 5rem);
   padding-top: clamp(0.65rem, 1.4vw, 1rem);
+  padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
   border-top: 2px dashed rgba(0, 51, 102, 0.36);
 }
 
@@ -1554,30 +1555,55 @@ body.loaded #loaderWall {
 
 .impact-logo-row {
   overflow: hidden;
-  padding-block: clamp(0.9rem, 1.8vw, 1.4rem);
+  padding-block: clamp(0.85rem, 1.4vw, 1.2rem);
+  -webkit-mask-image: linear-gradient(90deg, transparent, var(--dark-blue) 7%, var(--dark-blue) 93%, transparent);
   mask-image: linear-gradient(90deg, transparent, var(--dark-blue) 7%, var(--dark-blue) 93%, transparent);
+}
+
+.impact-logo-rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.35rem, 0.8vw, 0.7rem);
 }
 
 .impact-logo-track {
   width: max-content;
   display: flex;
   align-items: center;
-  gap: clamp(2.3rem, 5vw, 5.8rem);
   animation: impactLogoDrift 44s linear infinite;
+}
+
+.impact-logo-row--reverse .impact-logo-track {
+  animation-direction: reverse;
+  animation-duration: 50s;
+}
+
+.impact-logo-group {
+  display: flex;
+  align-items: center;
+  gap: clamp(2.3rem, 5vw, 5.8rem);
+  padding-right: clamp(2.3rem, 5vw, 5.8rem);
 }
 
 .impact-logo {
   flex: 0 0 auto;
   width: clamp(7.4rem, 10vw, 12.5rem);
-  height: clamp(3.6rem, 6.5vh, 5.6rem);
-  display: inline-grid;
-  place-items: center;
+  height: clamp(4.25rem, 7.5vh, 6.5rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .impact-logo img {
+  display: block;
+  min-width: 0;
+  min-height: 0;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
+  object-position: center;
   filter: brightness(0) saturate(100%) invert(16%) sepia(50%) saturate(1776%) hue-rotate(188deg) brightness(88%) contrast(98%);
   opacity: 0.98;
 }
@@ -1607,7 +1633,7 @@ body.loaded #loaderWall {
 /* ---- Work section ---- */
 .work {
   box-sizing: border-box;
-  min-height: 200svh;
+  min-height: auto;
   height: auto;
   overflow: visible;
   background: var(--dark-blue);
@@ -1616,15 +1642,15 @@ body.loaded #loaderWall {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .work__inner {
   width: min(96rem, 100%);
-  min-height: calc(200svh - 320px);
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: stretch;
 }
 
@@ -2295,7 +2321,7 @@ body.loaded #loaderWall {
   }
 
   .impact-logos {
-    margin-top: 200px;
+    margin-top: clamp(3.5rem, 5vw, 5rem);
   }
 }
 
@@ -2387,6 +2413,11 @@ body.loaded #loaderWall {
     gap: 1.5rem;
   }
 
+  .case-studies {
+    height: auto;
+    min-height: 100svh;
+  }
+
   .case-studies__side {
     justify-self: start;
     writing-mode: initial;
@@ -2416,8 +2447,9 @@ body.loaded #loaderWall {
   }
 
   .impact-section {
-    height: 100svh;
-    align-items: center;
+    height: auto;
+    min-height: auto;
+    align-items: flex-start;
     padding-block: 80px;
   }
 
@@ -2431,7 +2463,7 @@ body.loaded #loaderWall {
   }
 
   .impact-logo-row {
-    padding-block: clamp(0.5rem, 1.2vw, 0.9rem);
+    padding-block: clamp(0.75rem, 1.5vw, 1rem);
   }
 
   .work {
@@ -2439,7 +2471,7 @@ body.loaded #loaderWall {
   }
 
   .work__inner {
-    min-height: calc(200svh - 160px);
+    min-height: auto;
   }
 }
 
@@ -2658,8 +2690,9 @@ body.loaded #loaderWall {
   }
 
   .impact-section {
-    height: 100svh;
-    align-items: center;
+    height: auto;
+    min-height: auto;
+    align-items: flex-start;
     padding: 40px 0.75rem;
   }
 
@@ -2694,11 +2727,20 @@ body.loaded #loaderWall {
   }
 
   .impact-logo-row {
-    padding-block: 0.45rem;
+    padding-block: 0.75rem;
   }
 
   .impact-logo-track {
+    animation-duration: 36s;
+  }
+
+  .impact-logo-row--reverse .impact-logo-track {
+    animation-duration: 42s;
+  }
+
+  .impact-logo-group {
     gap: clamp(1.5rem, 6vw, 2.5rem);
+    padding-right: clamp(1.5rem, 6vw, 2.5rem);
   }
 
   .work {
