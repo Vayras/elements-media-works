@@ -1,4 +1,5 @@
 import caseStudies from "../data/caseStudies.js";
+import CaseStudyTitle from "../components/CaseStudyTitle.jsx";
 
 function CaseStudiesSection() {
   return (
@@ -25,7 +26,9 @@ function CaseStudiesSection() {
                 <div className="case-study-card__mark" aria-hidden="true">
                   <span>{index + 1}</span>
                 </div>
-                <h3>{study.title}</h3>
+                <h3>
+                  <CaseStudyTitle title={study.title} />
+                </h3>
               </a>
             ))}
           </div>

@@ -1,4 +1,5 @@
 import caseStudies from "../data/caseStudies.js";
+import CaseStudyTitle from "../components/CaseStudyTitle.jsx";
 
 function CaseStudySlide({ slide }) {
   return (
@@ -43,7 +44,9 @@ function CaseStudyDetailPanel({ study }) {
           <a className="case-study-detail__back" href="#case-studies">
             ← Case Studies
           </a>
-          <h2>{study.title}</h2>
+          <h2>
+            <CaseStudyTitle title={study.title} />
+          </h2>
         </div>
 
         <div className="case-study-detail__slides" aria-label={`${study.title} case study slides`}>

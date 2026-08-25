@@ -102,7 +102,7 @@ const caseStudies = [
   },
   {
     id: "heineken-case-study",
-    title: "Heineken @ Coachella & UEFA",
+    title: "Heineken © Coachella & UEFA",
     slides: [
       {
         label: "The Task",
@@ -124,12 +124,10 @@ const caseStudies = [
         label: "The Results",
         stats: [
           { value: "60", label: "content pieces (Coachella)" },
-          { value: "2.7M", label: "unique users reached" },
-          { value: "4.5M", label: "total impressions" },
-          { value: "1.5%", label: "avg. engagement rate" },
           { value: "35", label: "content pieces (UEFA)" },
-          { value: "0.7M", label: "unique users reached" },
-          { value: "1.2M", label: "total impressions" },
+          { value: "5.7M", label: "total impressions" },
+          { value: "3.5M", label: "unique users reached" },
+          { value: "1.5%", label: "avg. engagement rate" },
         ],
       },
     ],
@@ -305,7 +303,7 @@ const caseStudies = [
     slides: [
       {
         label: "Jio World Plaza Launch",
-        image: asset("assets/JWP launch.png"),
+        image: asset("assets/images/jwp-launch.jpg"),
       },
       {
         label: "The Task",
