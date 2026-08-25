@@ -1,3 +1,5 @@
+import { asset } from "../asset";
+
 const caseStudies = [
   {
     id: "keep-girls-case-study",
@@ -301,6 +303,10 @@ const caseStudies = [
     id: "jio-world-plaza-case-study",
     title: "Jio World Plaza Launch",
     slides: [
+      {
+        label: "Jio World Plaza Launch",
+        image: asset("assets/JWP launch.png"),
+      },
       {
         label: "The Task",
         items: [
