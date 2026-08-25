@@ -3,6 +3,8 @@
   --light-blue: #fada5e;
   --yellow: #fada5e;
   --pink: #ad2754;
+  --on-navy: #bbd4de;
+  --on-pink: #facdc7;
   --dark-red: #fada5e;
   --red: #ad2754;
   --live-color: var(--dark-blue);
@@ -346,7 +348,7 @@ body.menu-open .site-header .brand {
   height: 3.8rem;
   place-items: center;
   background: var(--pink);
-  color: var(--dark-blue);
+  color: var(--on-pink);
   clip-path: polygon(0 8%, 62% 0, 100% 18%, 100% 76%, 72% 100%, 22% 100%, 20% 78%, 0 78%);
 }
 
@@ -384,7 +386,7 @@ body.menu-open .site-header .brand {
   display: grid;
   place-items: center;
   background: var(--dark-blue);
-  color: var(--dark-blue);
+  color: var(--on-navy);
   overflow: hidden;
   transition: opacity 720ms ease, visibility 720ms ease;
 }
@@ -640,7 +642,7 @@ body.loaded #loaderWall {
   min-height: 3.1rem;
   padding: 0 1.2rem;
   place-items: center;
-  color: var(--dark-blue);
+  color: var(--on-pink);
   background: var(--pink);
   clip-path: polygon(100% 0, 100% 38%, 72% 100%, 0 100%, 0 62%, 65% 0);
   font-size: var(--small);
@@ -846,6 +848,7 @@ body.loaded #loaderWall {
 
 .blob-four {
   background: var(--pink);
+  color: var(--on-pink);
   clip-path: polygon(0 0, 48% 0, 100% 30%, 100% 48%, 78% 100%, 26% 100%, 0 12%);
 }
 
@@ -892,6 +895,7 @@ body.loaded #loaderWall {
 
 .service-card--pink-accent {
   background: var(--pink);
+  color: var(--on-pink);
   clip-path: polygon(28% 0, 82% 0, 82% 36%, 94% 36%, 100% 52%, 84% 72%, 73% 72%, 73% 90%, 62% 100%, 10% 100%, 10% 72%, 0 72%);
 }
 
@@ -1030,7 +1034,12 @@ body.loaded #loaderWall {
 .services-overview__card:hover {
   transform: translateX(0.45rem);
   background: var(--pink);
+  color: var(--on-pink);
   clip-path: polygon(0 12%, 92% 0, 100% 42%, 96% 100%, 6% 100%, 0 66%);
+}
+
+.services-overview__card:hover .services-overview__number {
+  color: rgb(250 205 199 / 0.7);
 }
 
 .services-overview__number {
@@ -1428,7 +1437,7 @@ body.loaded #loaderWall {
   min-height: 100svh;
   overflow: visible;
   background: var(--pink);
-  color: var(--dark-blue);
+  color: var(--on-pink);
   padding: clamp(6.4rem, 8vw, 8rem) clamp(1rem, 5vw, 4.8rem) clamp(1.2rem, 3vw, 2.4rem);
   display: flex;
   align-items: flex-start;
@@ -1445,7 +1454,7 @@ body.loaded #loaderWall {
 }
 
 .impact-section__head p {
-  color: rgba(0, 51, 102, 0.66);
+  color: rgb(250 205 199 / 0.72);
   font-family: var(--font-body);
   font-size: clamp(0.78rem, 1.1vw, 0.94rem);
   font-weight: 800;
@@ -1543,7 +1552,7 @@ body.loaded #loaderWall {
   margin-top: clamp(2.5rem, 5vw, 5rem);
   padding-top: clamp(0.65rem, 1.4vw, 1rem);
   padding-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
-  border-top: 2px dashed rgba(0, 51, 102, 0.36);
+  border-top: 2px dashed rgb(250 205 199 / 0.4);
 }
 
 .impact-logos h3 {
@@ -1586,9 +1595,11 @@ body.loaded #loaderWall {
 }
 
 .impact-logo {
+  box-sizing: border-box;
   flex: 0 0 auto;
   width: clamp(7.4rem, 10vw, 12.5rem);
   height: clamp(4.25rem, 7.5vh, 6.5rem);
+  padding: 0.55em 0.7em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1598,14 +1609,12 @@ body.loaded #loaderWall {
   display: block;
   min-width: 0;
   min-height: 0;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   object-position: center;
-  filter: brightness(0) saturate(100%) invert(16%) sepia(50%) saturate(1776%) hue-rotate(188deg) brightness(88%) contrast(98%);
-  opacity: 0.98;
 }
 
 @keyframes counterPop {
@@ -2173,7 +2182,7 @@ body.loaded #loaderWall {
   min-height: 5rem;
   place-items: center;
   padding: 0 1rem;
-  color: var(--dark-blue);
+  color: var(--on-pink);
   background: var(--pink);
   clip-path: polygon(0 0, 78% 0, 100% 28%, 100% 78%, 82% 100%, 0 100%);
   font-size: var(--small);
@@ -2208,6 +2217,7 @@ body.loaded #loaderWall {
   font-size: var(--base);
   padding: 1rem var(--page-pad) 3rem;
   margin: -1rem calc(var(--page-pad) * -1) 0;
+  color: #fff;
   background: linear-gradient(to bottom, var(--dark-blue) 0%, var(--dark-blue) calc(100% - 3rem), transparent 100%);
 }
 
@@ -2238,7 +2248,7 @@ body.loaded #loaderWall {
   width: min(27rem, 85vw);
   min-height: 18rem;
   padding: 1.2rem;
-  color: var(--dark-blue);
+  color: var(--on-pink);
   background: var(--pink);
   clip-path: polygon(0 0, 64% 0, 100% 42%, 100% 100%, 52% 100%, 0 68%);
   font-size: var(--heading);
@@ -2249,7 +2259,7 @@ body.loaded #loaderWall {
   align-self: end;
   justify-self: end;
   width: min(11rem, 42vw);
-  color: var(--dark-blue);
+  color: var(--on-pink);
 }
 
 .contact-blob strong .emw-logo,
