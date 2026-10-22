@@ -1,34 +1,31 @@
-const verbs = [
-  { verb: "We craft", object: "bold narratives" },
-  { verb: "We design", object: "high-impact campaigns" },
-  { verb: "We build", object: "seamless brand ecosystems" },
+const words = [
+  { word: "Narratives.", tone: "ink", align: "end" },
+  { word: "Campaigns.", tone: "accent", align: "start" },
+  { word: "Ecosystems.", tone: "ink", align: "end" },
 ];
 
 function CultureSection() {
   return (
     <section className="ds-who" id="culture" aria-labelledby="whoTitle">
       <div className="ds-wrap ds-who__inner">
-        <h2 className="ds-label ds-who__label" id="whoTitle">
-          <span>02</span>
-          <span>Who we are</span>
-        </h2>
-
-        <ol className="ds-who__rows">
-          {verbs.map((row, index) => (
-            <li className="ds-grid ds-who__row reveal" key={row.object}>
-              <span className="ds-who__num">{String(index + 1).padStart(2, "0")}</span>
-              <span className="ds-who__verb">{row.verb}</span>
-              <span className="ds-who__object">{row.object}</span>
-            </li>
-          ))}
-        </ol>
-
-        <div className="ds-grid ds-who__close reveal">
-          <span className="ds-caps ds-who__aside">Across platforms and mediums</span>
-          <p className="ds-who__statement">
-            Where creativity meets data-backed insights, and brands grow to be a part of the contemporary culture.
+        <div className="ds-who__intro">
+          <h2 className="ds-label ds-who__label" id="whoTitle">
+            <span>02</span>
+            <span>Who we are</span>
+          </h2>
+          <p className="ds-who__lede">
+            We craft bold narratives, design high-impact campaigns, and build seamless brand ecosystems across
+            platforms and mediums.
           </p>
         </div>
+
+        <p className="ds-who__poster" aria-hidden="true">
+          {words.map((item) => (
+            <span className={`ds-who__word ds-who__word--${item.tone} ds-who__word--${item.align} reveal`} key={item.word}>
+              {item.word}
+            </span>
+          ))}
+        </p>
       </div>
     </section>
   );

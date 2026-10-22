@@ -579,7 +579,7 @@ main {
 }
 
 /* ==========================================================================
-   Services — giant list
+   Services — statement grid
    ========================================================================== */
 
 .ds-services {
@@ -589,98 +589,115 @@ main {
 }
 
 .ds-services__inner {
-  row-gap: 40px;
-  padding-top: clamp(56px, 6vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: clamp(64px, 7vw, 96px);
   padding-bottom: clamp(64px, 7vw, 96px);
 }
 
-.ds-services__head {
-  grid-column: 1 / 4;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.ds-services__label {
+  margin: 0;
   color: var(--ds-blush);
 }
 
-.ds-services__title {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.45;
-}
-
-.ds-services__list {
-  grid-column: 4 / 13;
+.ds-services__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--ds-rule-navy);
+  border-left: 1px solid var(--ds-rule-navy);
 }
 
-.ds-services__item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
-  align-items: baseline;
-  gap: 8px 24px;
-  padding: 6px 0 10px;
+.ds-services__cell {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 260px;
+  padding: 20px 24px 28px;
+  border-right: 1px solid var(--ds-rule-navy);
   border-bottom: 1px solid var(--ds-rule-navy);
+  transition: background-color 0.2s var(--ds-ease), color 0.2s var(--ds-ease);
+}
+
+.ds-services__cell:nth-child(-n + 2) {
+  grid-column: span 3;
+}
+
+.ds-services__cell:hover {
+  background: var(--ds-yellow);
+  color: var(--ds-navy);
 }
 
 .ds-services__name {
+  display: flex;
+  gap: 14px;
   margin: 0;
-  font-size: clamp(34px, 4.6vw, 66px);
+  font-size: 13px;
   font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.045em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ds-blush);
   transition: color 0.2s var(--ds-ease);
 }
 
-.ds-services__item:hover .ds-services__name {
-  color: var(--ds-white);
+.ds-services__cell:hover .ds-services__name {
+  color: var(--ds-raspberry);
 }
 
-.ds-services__num {
-  margin-left: 6px;
-  font-size: 0.24em;
-  font-weight: 700;
-  letter-spacing: 0;
-  vertical-align: super;
-  color: var(--ds-blush);
-}
-
-.ds-services__desc {
+.ds-services__tag {
+  max-width: 14ch;
   margin: 0;
-  font-size: 15px;
-  line-height: 1.4;
-  color: var(--ds-blush);
+  font-size: clamp(32px, 3.4vw, 48px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
 
 @media (max-width: 1080px) {
-  .ds-services__item {
-    grid-template-columns: minmax(0, 1fr);
-    padding: 12px 0 16px;
+  .ds-services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .ds-services__desc {
-    max-width: 46ch;
-    font-size: 16px;
+  .ds-services__cell,
+  .ds-services__cell:nth-child(-n + 2) {
+    grid-column: span 1;
+    min-height: 220px;
+  }
+
+  .ds-services__cell:last-child {
+    grid-column: span 2;
   }
 }
 
-@media (max-width: 860px) {
-  .ds-services__head {
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
+@media (max-width: 600px) {
+  .ds-services__grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .ds-services__title {
-    font-size: 14px;
+  .ds-services__cell,
+  .ds-services__cell:nth-child(-n + 2),
+  .ds-services__cell:last-child {
+    grid-column: auto;
+    min-height: 150px;
+    padding: 16px 18px 20px;
+  }
+
+  .ds-services__name {
+    font-size: 12px;
+  }
+
+  .ds-services__tag {
+    font-size: 30px;
   }
 }
 
 /* ==========================================================================
-   Who we are — three verbs
+   Who we are — typographic poster
    ========================================================================== */
 
 .ds-who {
@@ -689,88 +706,51 @@ main {
 }
 
 .ds-who__inner {
-  padding-top: clamp(56px, 7vw, 96px);
-  padding-bottom: clamp(64px, 7vw, 104px);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: clamp(64px, 8vw, 112px);
+  padding-bottom: clamp(64px, 8vw, 112px);
+}
+
+.ds-who__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 34ch;
 }
 
 .ds-who__label {
-  padding-bottom: 40px;
+  margin: 0;
   color: var(--ds-raspberry);
 }
 
-.ds-who__rows {
+.ds-who__lede {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
-.ds-who__row {
-  align-items: baseline;
-  row-gap: 6px;
-  padding: 28px 0;
-  border-top: 1px solid var(--ds-navy);
+.ds-who__poster {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
-.ds-who__num {
-  grid-column: 1 / 2;
-  font-size: 13px;
+.ds-who__word {
+  display: block;
+  font-size: clamp(56px, 12.2vw, 176px);
   font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.055em;
+}
+
+.ds-who__word--end {
+  align-self: flex-end;
+}
+
+.ds-who__word--accent {
   color: var(--ds-raspberry);
-}
-
-.ds-who__verb {
-  grid-column: 2 / 5;
-  font-size: clamp(18px, 2vw, 28px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-
-.ds-who__object {
-  grid-column: 5 / 13;
-  font-size: clamp(36px, 5vw, 72px);
-  font-weight: 700;
-  line-height: 0.96;
-  letter-spacing: -0.04em;
-}
-
-.ds-who__close {
-  row-gap: 12px;
-  padding-top: 28px;
-  border-top: 1px solid var(--ds-navy);
-}
-
-.ds-who__aside {
-  grid-column: 2 / 5;
-  padding-top: 8px;
-}
-
-.ds-who__statement {
-  grid-column: 5 / 12;
-  margin: 0;
-  font-size: clamp(19px, 2vw, 28px);
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-}
-
-@media (max-width: 860px) {
-  .ds-who__label {
-    padding-bottom: 24px;
-  }
-
-  .ds-who__row {
-    grid-template-columns: 32px minmax(0, 1fr);
-    padding: 18px 0;
-  }
-
-  .ds-who__row > .ds-who__num {
-    grid-column: 1 / 2 !important;
-  }
-
-  .ds-who__row > .ds-who__verb,
-  .ds-who__row > .ds-who__object {
-    grid-column: 2 / 3 !important;
-  }
 }
 
 /* ==========================================================================
@@ -1494,14 +1474,13 @@ main {
 
 .ds-cases__body {
   row-gap: 32px;
-  border-top: 1px solid var(--ds-rule-ink);
+  padding-top: 8px;
 }
 
 .ds-cases__stage {
   grid-column: 1 / 8;
   display: grid;
-  padding: 32px 24px 0 0;
-  border-right: 1px solid var(--ds-rule-ink);
+  padding: 16px 48px 0 0;
   scroll-margin-top: calc(var(--ds-header-h) + 16px);
 }
 
@@ -1566,8 +1545,7 @@ main {
   align-items: flex-end;
   justify-content: space-between;
   gap: 20px;
-  padding-top: 18px;
-  border-top: 1px solid var(--ds-rule-ink);
+  padding-top: 12px;
 }
 
 .ds-cases__stat {
@@ -1597,10 +1575,6 @@ main {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.ds-cases__list li {
-  border-bottom: 1px solid var(--ds-rule-ink);
 }
 
 .ds-cases__item {
@@ -1654,8 +1628,6 @@ main {
   .ds-cases__stage {
     padding-right: 0;
     padding-bottom: 32px;
-    border-right: 0;
-    border-bottom: 1px solid var(--ds-rule-ink);
   }
 
   .ds-cases__result .ds-btn {
