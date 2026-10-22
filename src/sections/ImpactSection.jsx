@@ -27,7 +27,7 @@ function ImpactSection() {
           <dl className="ds-impact__stats">
             {impactStats.map((stat) => (
               <div
-                className={`ds-impact__cell reveal${stat.featured ? " ds-impact__cell--featured" : ""}`}
+                className={`ds-impact__cell${stat.featured ? " ds-impact__cell--featured" : ""}`}
                 key={stat.label}
               >
                 <dt className="ds-caps">{stat.label}</dt>

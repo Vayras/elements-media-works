@@ -109,7 +109,7 @@ function PostTile({ post, filter, hidden = false }) {
           </>
         )}
         <span className="ds-wk-tile__media">
-          <img src={post.image} alt="" loading="lazy" decoding="async" />
+          <img src={post.image} alt="" />
         </span>
         {post.format !== "post" && (
           <span className={`ds-wk-tile__chip ds-wk-tile__chip--${post.format}`}>

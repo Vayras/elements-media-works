@@ -17,7 +17,7 @@ function ServicesSection() {
 
         <ul className="ds-services__bento">
           {serviceItems.map((service, index) => (
-            <li className={`ds-services__tile ds-services__tile--${service.tone} reveal`} key={service.title}>
+            <li className={`ds-services__tile ds-services__tile--${service.tone}`} key={service.title}>
               <div className="ds-services__tile-top">
                 <h3 className="ds-services__name">{service.title}</h3>
                 <span className="ds-services__num" aria-hidden="true">

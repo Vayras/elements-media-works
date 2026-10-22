@@ -5,7 +5,6 @@ import CaseStudyDetailSection from "./sections/CaseStudyDetailSection.jsx";
 import ContactSection from "./sections/ContactSection.jsx";
 import CultureSection from "./sections/CultureSection.jsx";
 import MenuPanel from "./components/MenuPanel.jsx";
-import Preloader from "./components/Preloader.jsx";
 import FooterSection from "./sections/FooterSection.jsx";
 import HeroSection from "./sections/HeroSection.jsx";
 import ImpactSection from "./sections/ImpactSection.jsx";
@@ -15,44 +14,11 @@ import WorkSection from "./sections/WorkSection.jsx";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [preloaderProgress, setPreloaderProgress] = useState(0);
-  const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", isMenuOpen);
     return () => document.body.classList.remove("menu-open");
   }, [isMenuOpen]);
-
-  useEffect(() => {
-    document.body.classList.toggle("loaded", isLoaded);
-    return () => document.body.classList.remove("loaded");
-  }, [isLoaded]);
-
-  useEffect(() => {
-    let value = 0;
-    let finishTimeout;
-    let removeTimeout;
-
-    const loaderTimer = window.setInterval(() => {
-      value = Math.min(100, value + Math.ceil(Math.random() * 13));
-      setPreloaderProgress(value);
-
-      if (value >= 100) {
-        window.clearInterval(loaderTimer);
-        finishTimeout = window.setTimeout(() => {
-          setIsLoaded(true);
-          removeTimeout = window.setTimeout(() => setShowPreloader(false), 900);
-        }, 650);
-      }
-    }, 70);
-
-    return () => {
-      window.clearInterval(loaderTimer);
-      window.clearTimeout(finishTimeout);
-      window.clearTimeout(removeTimeout);
-    };
-  }, []);
 
   useEffect(() => {
     const updateCaseDetailState = () => {
@@ -79,32 +45,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!("IntersectionObserver" in window)) {
-      document.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
-      return undefined;
-    }
-
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        rootMargin: "0px 0px -8% 0px",
-        threshold: 0.16,
-      }
-    );
-
-    document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
-
-    return () => revealObserver.disconnect();
-  }, []);
-
-  useEffect(() => {
     const handleEscape = (event) => {
       if (event.key !== "Escape") return;
       setIsMenuOpen(false);
@@ -117,8 +57,6 @@ function App() {
 
   return (
     <>
-      {showPreloader && <Preloader progress={preloaderProgress} />}
-
       <Header isMenuOpen={isMenuOpen} onMenuToggle={() => setIsMenuOpen((isOpen) => !isOpen)} />
       <MenuPanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       <main>

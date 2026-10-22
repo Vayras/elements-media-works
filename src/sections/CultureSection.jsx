@@ -21,7 +21,7 @@ function CultureSection() {
 
         <p className="ds-who__poster" aria-hidden="true">
           {words.map((item) => (
-            <span className={`ds-who__word ds-who__word--${item.tone} ds-who__word--${item.align} reveal`} key={item.word}>
+            <span className={`ds-who__word ds-who__word--${item.tone} ds-who__word--${item.align}`} key={item.word}>
               {item.word}
             </span>
           ))}

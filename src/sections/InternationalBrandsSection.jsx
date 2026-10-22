@@ -1,6 +1,6 @@
 import { launchBrands, partnerBrands } from "../data/brands.js";
 
-function LogoMarquee({ logos, direction = "left", duration, label, tone, eager = false }) {
+function LogoMarquee({ logos, direction = "left", duration, label, tone }) {
   return (
     <div
       className={`ds-marquee ds-marquee--${direction} ds-marquee--${tone}`}
@@ -20,7 +20,6 @@ function LogoMarquee({ logos, direction = "left", duration, label, tone, eager =
                   className={logo.isWhite ? "is-white" : undefined}
                   src={logo.src}
                   alt={copy === 0 ? logo.name : ""}
-                  loading={eager ? "eager" : "lazy"}
                   style={{ "--logo-k": (1 / Math.sqrt(logo.ratio || 1)).toFixed(3) }}
                 />
               </li>
@@ -53,7 +52,7 @@ function InternationalBrandsSection() {
       <div className="ds-wrap ds-clients__row-head">
         <h3>Global launches</h3>
       </div>
-      <LogoMarquee logos={launchBrands} direction="left" duration={60} label="International brands launched in India" tone="light" eager />
+      <LogoMarquee logos={launchBrands} direction="left" duration={60} label="International brands launched in India" tone="light" />
 
       <div className="ds-clients__band">
         <div className="ds-wrap ds-clients__row-head ds-clients__row-head--dark">
