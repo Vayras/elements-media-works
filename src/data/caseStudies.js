@@ -1,9 +1,11 @@
-import { asset } from "../asset";
-
 const caseStudies = [
   {
     id: "keep-girls-case-study",
     title: "Keep Girls In School 5th Edition",
+    client: "Whisper India",
+    stat: "240Mn+",
+    statLabel: "views on Instagram",
+    summary: "Shreya Ghoshal & Sunidhi Chauhan recreated “The Period Song” to take the campaign to every corner of the country. Effies 2025 winner.",
     slides: [
       {
         label: "The Task",
@@ -38,6 +40,10 @@ const caseStudies = [
   {
     id: "arq-case-study",
     title: "ARQ by The Leela",
+    client: "The Leela",
+    stat: "3 tiers",
+    statLabel: "weekly, monthly & annual IPs",
+    summary: "Conceptualised and curated all monthly programming for a private members’ club for UHNIs.",
     slides: [
       {
         label: "The Task",
@@ -67,6 +73,10 @@ const caseStudies = [
   {
     id: "play-like-mumbai-case-study",
     title: "#PlayLikeMumbai for Mumbai Indians",
+    client: "Mumbai Indians",
+    stat: "875M+",
+    statLabel: "total digital impressions",
+    summary: "Bollywood, rappers and creators positioned the team as a cultural movement ahead of IPL and WPL 2025.",
     slides: [
       {
         label: "The Task",
@@ -102,7 +112,11 @@ const caseStudies = [
   },
   {
     id: "heineken-case-study",
-    title: "Heineken © Coachella & UEFA",
+    title: "Heineken × Coachella & UEFA",
+    client: "Heineken",
+    stat: "5.7M",
+    statLabel: "total impressions",
+    summary: "Influencer-led community building around the brand’s sponsorship of key international events.",
     slides: [
       {
         label: "The Task",
@@ -135,6 +149,10 @@ const caseStudies = [
   {
     id: "vivienne-westwood-case-study",
     title: "Vivienne Westwood",
+    client: "Vivienne Westwood India",
+    stat: "2 brands",
+    statLabel: "woven into the India launch",
+    summary: "Brought Tira and Johnnie Walker into the British-inspired luxury story at the Gateway of India.",
     slides: [
       {
         label: "The Task",
@@ -169,6 +187,10 @@ const caseStudies = [
   {
     id: "tira-case-study",
     title: "Brand Building: TIRA",
+    client: "Tira",
+    stat: "₹15 Cr+",
+    statLabel: "sales in 24 hours",
+    summary: "3000+ creators went live at once for Almost Everything On Sale, part of a three-year brand build.",
     slides: [
       {
         label: "2023",
@@ -219,6 +241,10 @@ const caseStudies = [
   {
     id: "ajio-case-study",
     title: "Long Term Partnership: AJIO",
+    client: "AJIO",
+    stat: "200M+",
+    statLabel: "reach, Big Bold Sale 3.0",
+    summary: "From the first-ever Big Bold Sale in 2021 to monthly campaigns and international brand launches.",
     slides: [
       {
         label: "2021–2022",
@@ -255,6 +281,10 @@ const caseStudies = [
   {
     id: "johnnie-walker-case-study",
     title: "Journey With Johnnie Walker",
+    client: "Johnnie Walker",
+    stat: "110M+",
+    statLabel: "cross-platform reach, 2023",
+    summary: "Five years of Keep Walking in India, from Mission Mars to an anthem with John Legend & Raja Kumari.",
     slides: [
       {
         label: "2018–2021",
@@ -300,11 +330,11 @@ const caseStudies = [
   {
     id: "jio-world-plaza-case-study",
     title: "Jio World Plaza Launch",
+    client: "Jio World Plaza",
+    stat: "₹60 Cr+",
+    statLabel: "earned media value",
+    summary: "28 celebrities walked a Manish Malhotra show for the Grand Opening Night.",
     slides: [
-      {
-        label: "Jio World Plaza Launch",
-        image: asset("assets/images/jwp-launch.jpg"),
-      },
       {
         label: "The Task",
         items: [
@@ -335,6 +365,10 @@ const caseStudies = [
   {
     id: "vantara-case-study",
     title: "The Launch of Vantara",
+    client: "Vantara",
+    stat: "3 phases",
+    statLabel: "lead-up, inauguration, sustenance",
+    summary: "Built the narrative around the founder’s story and wildlife conservation through PM Modi’s inauguration.",
     slides: [
       {
         label: "The Task",

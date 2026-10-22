@@ -1,55 +1,65 @@
-import { asset } from "../asset";
+import { launchBrands, partnerBrands } from "../data/brands.js";
 
-const logoPath = asset("assets/logos/international/");
-
-const launchBrands = [
-  ["Augustinus Bader", "augustinus-bader.svg"],
-  ["Youth To The People", "youth-to-the-people.png"],
-  ["Blessed Moon", "blessed-moon.svg"],
-  ["Allies of Skin", "allies-of-skin.jpg"],
-  ["Huda Beauty", "huda-beauty.svg"],
-  ["Laura Mercier", "laura-mercier.svg"],
-  ["TOD'S", "tods.svg"],
-  ["milktouch", "milktouch.png"],
-  ["Fenty Beauty by Rihanna", "fenty-beauty.svg"],
-  ["Tiffany & Co.", "tiffany.svg"],
-  ["Tom Ford", "tom-ford.svg"],
-  ["Armani Exchange", "armani-exchange.svg"],
-  ["Valentino", "valentino.svg"],
-  ["NARS", "nars.png"],
-  ["SHEIN", "shein.svg"],
-  ["ASOS", "asos.png"],
-  ["Mermade Hair", "mermade-hair.svg"],
-  ["Canali 1934", "canali.svg"],
-  ["La Mer", "la-mer.png"],
-  ["Estée Lauder", "estee-lauder.png"],
-];
+function LogoMarquee({ logos, direction = "left", duration, label, tone, eager = false }) {
+  return (
+    <div
+      className={`ds-marquee ds-marquee--${direction} ds-marquee--${tone}`}
+      style={{ "--ds-marquee-duration": `${duration}s` }}
+    >
+      <div className="ds-marquee__track">
+        {[0, 1].map((copy) => (
+          <ul
+            className="ds-marquee__group"
+            aria-label={copy === 0 ? label : undefined}
+            aria-hidden={copy === 1 ? true : undefined}
+            key={copy}
+          >
+            {logos.map((logo) => (
+              <li className="ds-marquee__item" key={`${logo.name}-${copy}`}>
+                <img
+                  className={logo.isWhite ? "is-white" : undefined}
+                  src={logo.src}
+                  alt={copy === 0 ? logo.name : ""}
+                  loading={eager ? "eager" : "lazy"}
+                  style={{ "--logo-k": (1 / Math.sqrt(logo.ratio || 1)).toFixed(3) }}
+                />
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function InternationalBrandsSection() {
   return (
-    <section
-      className="section-block international-brands"
-      id="international-brands"
-      data-section-label="International Brands"
-      data-section-color="#003366"
-      data-section-surface="light"
-    >
-      <div className="international-brands__inner">
-        <div className="international-brands__copy reveal">
-          <p className="international-brands__eyebrow">Global to local</p>
-          <h2>We help international brands launch in India.</h2>
-          <p>
-            Strategy, content, creators, events and cultural moments that make global names feel native to Indian audiences.
+    <section className="ds-clients" id="international-brands" aria-labelledby="clientsTitle">
+      <div className="ds-wrap ds-grid ds-clients__head">
+        <div className="ds-clients__intro">
+          <p className="ds-label ds-clients__label">
+            <span>03</span>
+            <span>Clients</span>
           </p>
+          <h2 className="ds-h2" id="clientsTitle">
+            We help international brands launch in India.
+          </h2>
         </div>
+        <p className="ds-lede ds-clients__lede">
+          Strategy, content, creators, events and cultural moments that make global names feel native to Indian audiences.
+        </p>
+      </div>
 
-        <ul className="international-brands__grid" aria-label="International brand logos">
-          {launchBrands.map(([name, logo]) => (
-            <li className="brand-logo reveal" key={name}>
-              <img src={`${logoPath}${logo}`} alt={name} loading="lazy" />
-            </li>
-          ))}
-        </ul>
+      <div className="ds-wrap ds-clients__row-head">
+        <h3>Global launches</h3>
+      </div>
+      <LogoMarquee logos={launchBrands} direction="left" duration={60} label="International brands launched in India" tone="light" eager />
+
+      <div className="ds-clients__band">
+        <div className="ds-wrap ds-clients__row-head ds-clients__row-head--dark">
+          <h3>And won the trust of many…</h3>
+        </div>
+        <LogoMarquee logos={partnerBrands} direction="right" duration={220} label="Brands we have worked with" tone="dark" />
       </div>
     </section>
   );

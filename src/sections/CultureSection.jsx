@@ -1,68 +1,34 @@
-import { useRef } from "react";
-
-const cultureCopy =
-  "We craft bold narratives, design high-impact campaigns, and build seamless brand ecosystems across platforms and mediums, where creativity meets data-backed insights, and brands grow to be a part of the contemporary culture.";
-
-const cultureWords = cultureCopy.split(" ");
+const verbs = [
+  { verb: "We craft", object: "bold narratives" },
+  { verb: "We design", object: "high-impact campaigns" },
+  { verb: "We build", object: "seamless brand ecosystems" },
+];
 
 function CultureSection() {
-  const sectionRef = useRef(null);
-  const textRef = useRef(null);
-  const lensRef = useRef(null);
-
-  const moveLens = (event) => {
-    if (event.pointerType === "touch") return;
-
-    const lens = lensRef.current;
-    const overWord = event.target.closest(".culture__word");
-    lens.classList.toggle("is-visible", Boolean(overWord));
-    if (!overWord) return;
-
-    const section = sectionRef.current.getBoundingClientRect();
-    const text = textRef.current.getBoundingClientRect();
-    const x = event.clientX - section.left;
-    const y = event.clientY - section.top;
-    const radius = lens.offsetWidth / 2;
-
-    lens.style.setProperty("--lens-x", `${x}px`);
-    lens.style.setProperty("--lens-y", `${y}px`);
-    lens.style.setProperty("--copy-left", `${text.left - section.left - x + radius}px`);
-    lens.style.setProperty("--copy-top", `${text.top - section.top - y + radius}px`);
-    lens.style.setProperty("--copy-width", `${text.width}px`);
-    lens.style.setProperty("--origin-x", `${event.clientX - text.left}px`);
-    lens.style.setProperty("--origin-y", `${event.clientY - text.top}px`);
-  };
-
   return (
-    <section
-      className="section-block culture"
-      id="culture"
-      data-section-label="Culture"
-      data-section-color="#003366"
-      ref={sectionRef}
-      onPointerEnter={moveLens}
-      onPointerMove={moveLens}
-      onPointerLeave={() => lensRef.current.classList.remove("is-visible")}
-    >
-      <p
-        className="culture__text"
-        ref={textRef}
-        style={{ "--culture-word-count": cultureWords.length }}
-      >
-        {cultureWords.map((word, index) => (
-          <span className="culture__word" style={{ "--word-index": index }} key={`${word}-${index}`}>
-            {word}
-          </span>
-        ))}
-      </p>
-      <div className="culture__lens" ref={lensRef} aria-hidden="true">
-        <p className="culture__text culture__lens-copy">
-          {cultureWords.map((word, index) => (
-            <span className="culture__word" key={`${word}-lens-${index}`}>
-              {word}
-            </span>
+    <section className="ds-who" id="culture" aria-labelledby="whoTitle">
+      <div className="ds-wrap ds-who__inner">
+        <h2 className="ds-label ds-who__label" id="whoTitle">
+          <span>02</span>
+          <span>Who we are</span>
+        </h2>
+
+        <ol className="ds-who__rows">
+          {verbs.map((row, index) => (
+            <li className="ds-grid ds-who__row reveal" key={row.object}>
+              <span className="ds-who__num">{String(index + 1).padStart(2, "0")}</span>
+              <span className="ds-who__verb">{row.verb}</span>
+              <span className="ds-who__object">{row.object}</span>
+            </li>
           ))}
-        </p>
+        </ol>
+
+        <div className="ds-grid ds-who__close reveal">
+          <span className="ds-caps ds-who__aside">Across platforms and mediums</span>
+          <p className="ds-who__statement">
+            Where creativity meets data-backed insights, and brands grow to be a part of the contemporary culture.
+          </p>
+        </div>
       </div>
     </section>
   );
