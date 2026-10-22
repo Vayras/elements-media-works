@@ -1,13 +1,13 @@
 const heroLines = ["We’re an integrated", "marketing and brand", "experience agency."];
 
-function HeroSection({ startTyping }) {
+function HeroSection() {
   return (
-    <section className={`ds-hero${startTyping ? " is-ready" : ""}`} id="top" aria-labelledby="heroTitle">
+    <section className="ds-hero" id="top" aria-labelledby="heroTitle">
       <div className="ds-wrap ds-grid ds-hero__inner">
         <h1 className="ds-hero__title" id="heroTitle">
-          {heroLines.map((line, index) => (
+          {heroLines.map((line) => (
             <span className="ds-hero__line" key={line}>
-              <span style={{ animationDelay: `${index * 90}ms` }}>{line}</span>
+              {line}
             </span>
           ))}
         </h1>

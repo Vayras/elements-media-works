@@ -122,7 +122,7 @@ function App() {
       <Header isMenuOpen={isMenuOpen} onMenuToggle={() => setIsMenuOpen((isOpen) => !isOpen)} />
       <MenuPanel isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       <main>
-        <HeroSection startTyping={!showPreloader} />
+        <HeroSection />
         <ServicesSection />
         <CultureSection />
         <InternationalBrandsSection />

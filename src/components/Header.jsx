@@ -1,33 +1,8 @@
-import { useEffect, useRef } from "react";
 import Logo from "./Logo";
 
 function Header({ isMenuOpen, onMenuToggle }) {
-  const headerRef = useRef(null);
-
-  useEffect(() => {
-    let frame;
-    const update = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
-      headerRef.current?.style.setProperty("--ds-scroll", progress.toFixed(4));
-      frame = undefined;
-    };
-    const onScroll = () => {
-      if (frame === undefined) frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (frame !== undefined) window.cancelAnimationFrame(frame);
-    };
-  }, []);
-
   return (
-    <header className="ds-header" ref={headerRef}>
+    <header className="ds-header">
       <div className="ds-wrap ds-header__bar">
         <a className="ds-header__brand" href="#top" aria-label="EMW, Elements Media Works home">
           <Logo />
@@ -46,7 +21,6 @@ function Header({ isMenuOpen, onMenuToggle }) {
           </svg>
         </button>
       </div>
-      <div className="ds-header__progress" aria-hidden="true" />
     </header>
   );
 }
