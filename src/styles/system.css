@@ -1498,14 +1498,28 @@ main {
   border-top: 1px solid var(--ds-rule-ink);
 }
 
-.ds-cases__feature {
+.ds-cases__stage {
   grid-column: 1 / 8;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+  display: grid;
   padding: 32px 24px 0 0;
   border-right: 1px solid var(--ds-rule-ink);
   scroll-margin-top: calc(var(--ds-header-h) + 16px);
+}
+
+.ds-cases__feature {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s var(--ds-ease), visibility 0s linear 0.3s;
+}
+
+.ds-cases__feature.is-active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s var(--ds-ease), visibility 0s;
 }
 
 .ds-cases__feature-top {
@@ -1517,11 +1531,11 @@ main {
 
 .ds-cases__num {
   font-size: clamp(96px, 11vw, 160px);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 0.8;
-  letter-spacing: -0.06em;
-  color: var(--ds-yellow);
-  -webkit-text-stroke: 2px var(--ds-navy);
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ds-raspberry);
 }
 
 .ds-cases__client {
@@ -1547,6 +1561,7 @@ main {
 }
 
 .ds-cases__result {
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -1637,7 +1652,7 @@ main {
 }
 
 @media (max-width: 860px) {
-  .ds-cases__feature {
+  .ds-cases__stage {
     padding-right: 0;
     padding-bottom: 32px;
     border-right: 0;
@@ -1988,6 +2003,7 @@ body.case-detail-open {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ds-cases__feature,
   .ds-case,
   .ds-case:target {
     transform: none;
