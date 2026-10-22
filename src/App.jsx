@@ -167,7 +167,12 @@ function App() {
 
   useEffect(() => {
     const updateCaseDetailState = () => {
-      const isCaseDetailOpen = Boolean(document.querySelector(".case-study-detail:target"));
+      const openCase = document.querySelector(".ds-case:target");
+      const isCaseDetailOpen = Boolean(openCase);
+      if (openCase) {
+        openCase.scrollTop = 0;
+        openCase.focus({ preventScroll: true });
+      }
       document.body.classList.toggle("case-detail-open", isCaseDetailOpen);
       document.documentElement.classList.toggle("case-detail-open", isCaseDetailOpen);
     };
@@ -214,7 +219,9 @@ function App() {
 
   useEffect(() => {
     const handleEscape = (event) => {
-      if (event.key === "Escape") setIsMenuOpen(false);
+      if (event.key !== "Escape") return;
+      setIsMenuOpen(false);
+      if (document.querySelector(".ds-case:target")) window.location.hash = "case-studies";
     };
 
     window.addEventListener("keydown", handleEscape);

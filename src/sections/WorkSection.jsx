@@ -74,7 +74,7 @@ const FILTERS = ["All", "Campaigns", "Brand Elchemy", "Social"];
 
 function ReelTile({ href, image, title, meta, index }) {
   return (
-    <li className="ds-reel reveal">
+    <li className="ds-reel">
       <a className="ds-reel__link" href={href} target="_blank" rel="noreferrer">
         <span className="ds-reel__media">
           <img src={image} alt="" loading="lazy" />
@@ -143,7 +143,7 @@ function WorkSection() {
               index={index}
             />
           ))}
-          <li className="ds-reel ds-reel--cta reveal">
+          <li className="ds-reel ds-reel--cta">
             <a className="ds-reel__link" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
               <span className="ds-reel__media ds-reel__media--cta">
                 <span className="ds-caps">More on Instagram</span>
