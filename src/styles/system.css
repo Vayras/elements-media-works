@@ -1135,10 +1135,11 @@ main {
 }
 
 /* ==========================================================================
-   Work — 9:16 reel tiles
+   Work — Cosmos wall: still on desktop, drifting on tablet and phone
    ========================================================================== */
 
 .ds-work {
+  overflow: hidden;
   background: var(--ds-navy);
   color: var(--ds-yellow);
   border-top: 1px solid var(--ds-rule-navy);
@@ -1147,12 +1148,12 @@ main {
 
 .ds-work__head {
   align-items: end;
-  row-gap: 16px;
-  padding-bottom: 24px;
+  row-gap: 20px;
+  padding-bottom: 32px;
 }
 
 .ds-work__intro {
-  grid-column: 1 / 9;
+  grid-column: 1 / 7;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1162,11 +1163,11 @@ main {
   color: var(--ds-blush);
 }
 
-.ds-work__handle {
-  grid-column: 9 / 13;
-  justify-self: end;
-  font-size: 17px;
-  font-weight: 700;
+.ds-work__lede {
+  grid-column: 7 / 12;
+  margin: 0;
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.4;
   color: var(--ds-blush);
 }
 
@@ -1176,18 +1177,25 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: 8px 24px;
-  margin-bottom: 32px;
   border-bottom: 1px solid var(--ds-rule-navy);
-  color: var(--ds-blush);
 }
 
 .ds-work__filters {
   display: flex;
-  flex-wrap: wrap;
   gap: 0 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ds-work__filters::-webkit-scrollbar {
+  display: none;
 }
 
 .ds-work__filter {
+  flex: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
   min-height: 48px;
   margin-bottom: -1px;
   padding: 0;
@@ -1203,61 +1211,75 @@ main {
   transition: color 0.2s var(--ds-ease), border-color 0.2s var(--ds-ease);
 }
 
+.ds-work__filter sup {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ds-blush);
+}
+
 .ds-work__filter:hover {
   color: var(--ds-white);
 }
 
 .ds-work__filter[aria-pressed="true"] {
-  color: var(--ds-yellow);
   font-weight: 700;
+  color: var(--ds-yellow);
   border-bottom-color: var(--ds-yellow);
 }
 
-.ds-work__filter:focus-visible {
+.ds-work__filter:focus-visible,
+.ds-work__pause:focus-visible {
   outline: 2px solid var(--ds-yellow);
   outline-offset: 2px;
 }
 
-.ds-work__rail {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 40px var(--ds-col-gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.ds-work__handle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ds-blush);
 }
 
-.ds-work__subhead {
-  margin: 64px 0 24px;
-  padding-top: 24px;
-  border-top: 1px solid var(--ds-rule-navy);
-}
+/* ---------- Tiles ---------- */
 
-.ds-work__subhead h3 {
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: -0.02em;
-}
-
-.ds-reel__link {
+.ds-wk-tile {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  color: inherit;
+  gap: 12px;
+  color: var(--ds-yellow);
   text-decoration: none;
+  transition: opacity 0.35s ease;
 }
 
-.ds-reel__media {
+.ds-wk-tile.is-dim {
+  opacity: 0.16;
+}
+
+.ds-wk-tile__frame {
   position: relative;
   display: block;
-  aspect-ratio: 9 / 16;
-  overflow: hidden;
-  background: var(--ds-navy-2);
-  border: 1px solid var(--ds-rule-navy);
-  box-sizing: border-box;
+  width: 100%;
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+  transition: outline-color 0.2s ease;
 }
 
-.ds-reel__media img {
+.ds-wk-tile:hover .ds-wk-tile__frame,
+.ds-wk-tile:focus-visible .ds-wk-tile__frame {
+  outline-color: var(--ds-yellow);
+}
+
+.ds-wk-tile:focus-visible {
+  outline: none;
+}
+
+.ds-wk-tile__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ds-navy-2);
+}
+
+.ds-wk-tile__media img {
   display: block;
   width: 100%;
   height: 100%;
@@ -1265,112 +1287,262 @@ main {
   transition: transform 0.6s var(--ds-ease);
 }
 
-.ds-reel__watch {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 14px 16px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ds-navy);
-  background: var(--ds-yellow);
-  transform: translateY(101%);
-  transition: transform 0.35s var(--ds-ease);
-}
-
-.ds-reel__link:hover .ds-reel__media img,
-.ds-reel__link:focus-visible .ds-reel__media img {
+.ds-wk-tile:hover .ds-wk-tile__media img {
   transform: scale(1.04);
 }
 
-.ds-reel__link:hover .ds-reel__watch,
-.ds-reel__link:focus-visible .ds-reel__watch {
-  transform: translateY(0);
+/* Carousels: two sheets peek out behind the cover, like the next slides. */
+.ds-wk-tile__sheet {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--ds-yellow);
+  transition: transform 0.45s var(--ds-ease);
 }
 
-.ds-reel__link:focus-visible {
-  outline: 2px solid var(--ds-yellow);
-  outline-offset: 4px;
+.ds-wk-tile__sheet--back {
+  transform: translate(12px, -12px);
 }
 
-.ds-reel__meta {
+.ds-wk-tile__sheet--front {
+  background: var(--ds-navy-2);
+  transform: translate(6px, -6px);
+}
+
+.ds-wk-tile:hover .ds-wk-tile__sheet--back {
+  transform: translate(18px, -18px);
+}
+
+.ds-wk-tile:hover .ds-wk-tile__sheet--front {
+  transform: translate(9px, -9px);
+}
+
+.ds-wk-tile__chip {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px 5px 7px;
+  color: var(--ds-navy);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ds-wk-tile__chip svg {
+  width: 12px;
+  height: 12px;
+}
+
+.ds-wk-tile__chip--reel {
+  background: var(--ds-yellow);
+}
+
+.ds-wk-tile__chip--carousel {
+  background: var(--ds-white);
+}
+
+.ds-wk-tile__meta {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding-top: 12px;
+  gap: 4px;
+  padding-top: 10px;
   border-top: 1px solid var(--ds-rule-navy);
 }
 
-.ds-reel__meta .ds-caps {
+.ds-wk-tile__meta .ds-caps {
+  font-size: 11px;
   color: var(--ds-blush);
 }
 
-.ds-reel__title {
-  font-size: 18px;
+.ds-wk-tile__title {
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
-.ds-reel__media--cta {
+/* ---------- Desktop: still wall ---------- */
+
+.ds-work__wall {
   display: flex;
+  align-items: flex-start;
+  gap: var(--ds-col-gap);
+  padding-top: 40px;
+}
+
+.ds-work__col {
+  display: flex;
+  flex: 1 1 0;
   flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.ds-work__drift {
+  display: none;
+}
+
+/* ---------- Footer row ---------- */
+
+.ds-work__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  color: var(--ds-navy);
-  background: var(--ds-yellow);
-  box-sizing: border-box;
-  transition: background-color 0.3s var(--ds-ease), color 0.3s var(--ds-ease);
+  gap: 16px 24px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ds-rule-navy);
 }
 
-.ds-reel__cta-title {
-  font-size: clamp(28px, 2.6vw, 40px);
+.ds-work__count {
+  font-size: 15px;
+  color: var(--ds-blush);
+}
+
+.ds-work__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.ds-work__pause {
+  display: none;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid var(--ds-yellow);
+  background: transparent;
+  color: var(--ds-yellow);
+  font: inherit;
+  font-size: 15px;
   font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ds-ease), color 0.2s var(--ds-ease);
 }
 
-.ds-reel--cta .ds-reel__link:hover .ds-reel__media--cta {
+.ds-work__pause:hover {
+  background: var(--ds-yellow);
   color: var(--ds-navy);
-  background: var(--ds-white);
+}
+
+/* ---------- Tablet and phone: drifting wall ---------- */
+
+@keyframes ds-work-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @media (max-width: 1080px) {
-  .ds-work__rail {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: calc((100% - 2 * var(--ds-col-gap)) / 3.3);
-    margin-inline: calc(-1 * var(--ds-gutter));
-    padding-inline: var(--ds-gutter);
-    padding-bottom: 8px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--ds-gutter);
-    overscroll-behavior-x: contain;
-    scrollbar-width: none;
-  }
-
-  .ds-work__rail::-webkit-scrollbar {
+  .ds-work__wall {
     display: none;
   }
 
-  .ds-reel {
-    scroll-snap-align: start;
+  .ds-work__drift {
+    display: block;
+    overflow: hidden;
+    padding: 40px 0 4px var(--ds-gutter);
+  }
+
+  .ds-work__track {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    align-items: flex-start;
+    animation: ds-work-drift 70s linear infinite;
+  }
+
+  .ds-work__track.is-paused,
+  .ds-work__drift:hover .ds-work__track {
+    animation-play-state: paused;
+  }
+
+  .ds-work__pair {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: 24px;
+    width: 220px;
+    margin-right: 20px;
+  }
+
+  .ds-work__pause {
+    display: inline-flex;
+    align-items: center;
   }
 }
 
 @media (max-width: 860px) {
   .ds-work__handle {
-    justify-self: start;
+    display: none;
   }
 }
 
 @media (max-width: 600px) {
-  .ds-work__rail {
-    grid-auto-columns: 64%;
+  .ds-work__track {
+    animation-duration: 60s;
   }
 
-  .ds-work__bar > .ds-caps {
+  .ds-work__pair {
+    gap: 16px;
+    width: 150px;
+    margin-right: 12px;
+  }
+
+  .ds-wk-tile__chip {
+    top: 6px;
+    left: 6px;
+    padding: 4px;
+  }
+
+  .ds-wk-tile__chip-label {
     display: none;
+  }
+
+  .ds-wk-tile__sheet--back {
+    transform: translate(8px, -8px);
+  }
+
+  .ds-wk-tile__sheet--front {
+    transform: translate(4px, -4px);
+  }
+
+  .ds-wk-tile__title {
+    font-size: 14px;
+  }
+
+  .ds-wk-tile__meta .ds-caps {
+    font-size: 10px;
+  }
+
+  .ds-work__actions,
+  .ds-work__actions .ds-btn {
+    width: 100%;
+  }
+
+  .ds-work__actions .ds-btn {
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-work__drift {
+    overflow-x: auto;
+  }
+
+  .ds-work__track {
+    animation: none;
+  }
+
+  .ds-work__pause {
+    display: none !important;
   }
 }
 
