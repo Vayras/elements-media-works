@@ -1,46 +1,25 @@
-import { useEffect, useState } from "react";
+const heroLines = ["We’re an integrated", "marketing and brand", "experience agency."];
 
-const heroCopy = "We’re an integrated marketing and brand experience agency.";
-
-function HeroSection({ startTyping }) {
-  const [displayText, setDisplayText] = useState("");
-
-  useEffect(() => {
-    if (!startTyping) return undefined;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplayText(heroCopy);
-      return undefined;
-    }
-
-    let index = 0;
-    const typingTimer = window.setInterval(() => {
-      index += 1;
-      setDisplayText(heroCopy.slice(0, index));
-
-      if (index >= heroCopy.length) {
-        window.clearInterval(typingTimer);
-      }
-    }, 45);
-
-    return () => window.clearInterval(typingTimer);
-  }, [startTyping]);
-
+function HeroSection() {
   return (
-    <section
-      className="section-block hero surface-red"
-      id="top"
-      data-section-label="Home"
-      data-section-color="#FADA5E"
-    >
-      <h1 className="hero-typewriter reveal" aria-label={heroCopy}>
-        <span aria-hidden="true">{displayText}</span>
-        <span className="typewriter-cursor" aria-hidden="true">|</span>
-      </h1>
-      <a className="scroll-indicator" href="#services" aria-label="Scroll to see more">
-        <span>Scroll to see more</span>
-        <span className="scroll-indicator__shape" aria-hidden="true"></span>
-      </a>
+    <section className="ds-hero" id="top" aria-labelledby="heroTitle">
+      <div className="ds-wrap ds-grid ds-hero__inner">
+        <h1 className="ds-hero__title" id="heroTitle">
+          {heroLines.map((line) => (
+            <span className="ds-hero__line" key={line}>
+              {line}
+            </span>
+          ))}
+        </h1>
+        <div className="ds-hero__actions">
+          <a className="ds-btn ds-btn--yellow" href="#contact">
+            Start a project<span className="ds-btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a className="ds-btn ds-btn--outline" href="#projects">
+            See our work
+          </a>
+        </div>
+      </div>
     </section>
   );
 }
