@@ -62,7 +62,7 @@ function MenuPanel({ isOpen, onClose }) {
           <a className="ds-btn ds-btn--navy" href={`mailto:${CONTACT_EMAIL}?subject=Let%E2%80%99s%20collab`} tabIndex={isOpen ? 0 : -1}>
             Let’s collab<span className="ds-btn__arrow" aria-hidden="true">→</span>
           </a>
-          <img className="ds-menu__reel" src={asset("assets/images/contacto.gif")} alt="" />
+          <img className="ds-menu__reel" src={asset("assets/images/contacto.gif")} alt="" loading="lazy" />
           <div className="ds-menu__info">
             <span className="ds-caps">Email</span>
             <a className="ds-link" href={`mailto:${CONTACT_EMAIL}`} tabIndex={isOpen ? 0 : -1}>{CONTACT_EMAIL}</a>
@@ -70,9 +70,11 @@ function MenuPanel({ isOpen, onClose }) {
           <div className="ds-menu__info">
             <span className="ds-caps">Visit</span>
             <address style={{ fontStyle: "normal" }}>
-              217, Kuber Complex, New Link Road
+              Shri Krishna Complex, 501, Link Rd,
               <br />
-              Andheri West, Mumbai 400053
+              Veera Desai Industrial Estate, Andheri West,
+              <br />
+              Mumbai, Maharashtra 400053
             </address>
           </div>
           <div className="ds-menu__info">

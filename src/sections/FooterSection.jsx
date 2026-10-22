@@ -23,9 +23,11 @@ function FooterSection() {
           <div className="ds-footer__col">
             <h2 className="ds-caps">Visit</h2>
             <address>
-              217, Kuber Complex, New Link Road
+              Shri Krishna Complex, 501, Link Rd,
               <br />
-              Andheri West, Mumbai 400053
+              Veera Desai Industrial Estate, Andheri West,
+              <br />
+              Mumbai, Maharashtra 400053
             </address>
           </div>
 
