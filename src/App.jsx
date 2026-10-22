@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import CaseStudiesSection from "./sections/CaseStudiesSection.jsx";
 import CaseStudyDetailSection from "./sections/CaseStudyDetailSection.jsx";
+import ContactSection from "./sections/ContactSection.jsx";
 import CultureSection from "./sections/CultureSection.jsx";
 import MenuPanel from "./components/MenuPanel.jsx";
 import Preloader from "./components/Preloader.jsx";
@@ -243,6 +244,7 @@ function App() {
         <WorkSection />
         <CaseStudiesSection />
         <CaseStudyDetailSection />
+        <ContactSection />
       </main>
       <FooterSection />
     </>
