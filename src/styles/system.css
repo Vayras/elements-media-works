@@ -647,3 +647,97 @@ main {
     font-size: 14px;
   }
 }
+
+/* ==========================================================================
+   Who we are — three verbs
+   ========================================================================== */
+
+.ds-who {
+  background: var(--ds-yellow);
+  color: var(--ds-navy);
+}
+
+.ds-who__inner {
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(64px, 7vw, 104px);
+}
+
+.ds-who__label {
+  padding-bottom: 40px;
+  color: var(--ds-raspberry);
+}
+
+.ds-who__rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-who__row {
+  align-items: baseline;
+  row-gap: 6px;
+  padding: 28px 0;
+  border-top: 1px solid var(--ds-navy);
+}
+
+.ds-who__num {
+  grid-column: 1 / 2;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ds-raspberry);
+}
+
+.ds-who__verb {
+  grid-column: 2 / 5;
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.ds-who__object {
+  grid-column: 5 / 13;
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.ds-who__close {
+  row-gap: 12px;
+  padding-top: 28px;
+  border-top: 1px solid var(--ds-navy);
+}
+
+.ds-who__aside {
+  grid-column: 2 / 5;
+  padding-top: 8px;
+}
+
+.ds-who__statement {
+  grid-column: 5 / 12;
+  margin: 0;
+  font-size: clamp(19px, 2vw, 28px);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+@media (max-width: 860px) {
+  .ds-who__label {
+    padding-bottom: 24px;
+  }
+
+  .ds-who__row {
+    grid-template-columns: 32px minmax(0, 1fr);
+    padding: 18px 0;
+  }
+
+  .ds-who__row > .ds-who__num {
+    grid-column: 1 / 2 !important;
+  }
+
+  .ds-who__row > .ds-who__verb,
+  .ds-who__row > .ds-who__object {
+    grid-column: 2 / 3 !important;
+  }
+}
