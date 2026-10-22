@@ -1,66 +1,47 @@
 import Logo from "../components/Logo.jsx";
 
-const INSTAGRAM_URL = "https://www.instagram.com/elementsmediaworks/";
+const footerLinks = [{ href: "#top", label: "ELEMENTS MEDIA WORKS" }];
 
-const exploreLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#international-brands", label: "Clients" },
-  { href: "#impact", label: "Impact" },
-  { href: "#projects", label: "Work" },
-  { href: "#case-studies", label: "Case Studies" },
-];
 
 function FooterSection() {
   return (
-    <footer className="ds-footer">
-      <div className="ds-wrap">
-        <div className="ds-grid ds-footer__grid">
-          <div className="ds-footer__brand">
-            <Logo className="ds-footer__logo" />
-            <span>Elements Media Works</span>
-          </div>
+    <footer
+      className="section-block site-footer surface-blue"
+      id="contact"
+      data-section-label="Contact"
+      data-section-color="#AD2754"
+    >
+      <div className="footer-top">
+        <ul>
+          {footerLinks.map((link) => (
+            <li key={link.label}>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+        <address>
+          <span>217, Kuber Complex, New Link Road</span>
+          <span>Andheri West, Mumbai 400053</span>
+          <a href="tel:+919820691905">Mobile: +91 98206 91905</a>
+          <a href="tel:+919867349147">+91 98673 49147</a>
+          <a href="mailto:shashwat@elementsmediaworks.com">shashwat@elementsmediaworks.com</a>
+          <a href="mailto:jaymin@elementsmediaworks.com">jaymin@elementsmediaworks.com</a>
+        </address>
 
-          <div className="ds-footer__col">
-            <h2 className="ds-caps">Visit</h2>
-            <address>
-              217, Kuber Complex, New Link Road
-              <br />
-              Andheri West, Mumbai 400053
-            </address>
-          </div>
-
-          <div className="ds-footer__col">
-            <h2 className="ds-caps">Talk</h2>
-            <a className="ds-link" href="tel:+919820691905">
-              +91 98206 91905
-            </a>
-            <a className="ds-link" href="tel:+919867349147">
-              +91 98673 49147
-            </a>
-          </div>
-
-          <nav className="ds-footer__col" aria-label="Footer">
-            <h2 className="ds-caps">Explore</h2>
-            <div className="ds-footer__links">
-              {exploreLinks.map((link) => (
-                <a className="ds-link" href={link.href} key={link.href}>
-                  {link.label}
-                </a>
-              ))}
-              <a className="ds-link" href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
-                Instagram ↗
-              </a>
-            </div>
-          </nav>
-        </div>
-
-        <div className="ds-footer__bottom">
-          <span>© {new Date().getFullYear()} Elements Media Works</span>
-          <a className="ds-link" href="#top">
-            Back to top ↑
-          </a>
-        </div>
       </div>
+
+      <div className="footer-wall">
+        {/* Wall removed as requested */}
+        <a className="contact-blob" href="mailto:shashwat@elementsmediaworks.com">
+          <span>Contact</span>
+          <span>E-MAIL</span>
+          <strong aria-label="EMW, ELEMENTS MEDIA WORKS">
+            <Logo className="emw-logo" />
+          </strong>
+        </a>
+      </div>
+
+      <div className="footer-bottom"></div>
     </footer>
   );
 }
