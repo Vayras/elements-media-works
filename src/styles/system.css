@@ -1,7 +1,6 @@
 /* ==========================================================================
    EMW design system — Swiss grid, Bricolage Grotesque, navy / yellow /
-   raspberry / blush. Loaded after the legacy styles.css; every new section
-   uses the ds- prefixed classes below.
+   raspberry / blush. Every section uses the ds- prefixed classes below.
    ========================================================================== */
 
 :root {
@@ -16,6 +15,7 @@
   --ds-rule-ink: #003366;
   --ds-rule-rasp: rgba(250, 205, 199, 0.5);
   --ds-rule-soft: #d5dee8;
+  --ds-font: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --ds-wrap: 1320px;
   --ds-gutter: clamp(16px, 4vw, 48px);
   --ds-col-gap: 24px;
@@ -30,12 +30,117 @@
   }
 }
 
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
+  background: var(--ds-navy);
+  scroll-behavior: smooth;
   scroll-padding-top: var(--ds-header-h);
 }
 
 body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--ds-navy);
+  color: var(--ds-yellow);
+  font-family: var(--ds-font);
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Preloader ---------- */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--ds-navy);
+  transition: opacity 720ms ease, visibility 720ms ease;
+}
+
+body.loaded .preloader {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader__logo-container {
+  position: relative;
+  width: min(80vw, 960px);
+  aspect-ratio: 1025 / 321;
+}
+
+.loader__logo-base,
+.loader__logo-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loader__logo-base {
+  opacity: 0.15;
+}
+
+.loader__logo-fill {
+  transition: clip-path 0.15s ease-out;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 620ms var(--ds-ease), transform 620ms var(--ds-ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ---------- Layout primitives ---------- */
