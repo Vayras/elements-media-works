@@ -147,10 +147,6 @@ function WorkSection() {
               Work
             </h2>
           </div>
-          <p className="ds-work__lede">
-            Reels, carousels and posts from our feed — campaigns, Brand Elchemy collaborations and the moments in
-            between.
-          </p>
         </div>
 
         <div className="ds-work__bar">

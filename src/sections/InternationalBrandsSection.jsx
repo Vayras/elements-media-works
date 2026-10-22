@@ -16,7 +16,13 @@ function LogoMarquee({ logos, direction = "left", duration, label, tone, eager =
           >
             {logos.map((logo) => (
               <li className="ds-marquee__item" key={`${logo.name}-${copy}`}>
-                <img className={logo.isWhite ? "is-white" : undefined} src={logo.src} alt={copy === 0 ? logo.name : ""} loading={eager ? "eager" : "lazy"} />
+                <img
+                  className={logo.isWhite ? "is-white" : undefined}
+                  src={logo.src}
+                  alt={copy === 0 ? logo.name : ""}
+                  loading={eager ? "eager" : "lazy"}
+                  style={{ "--logo-k": (1 / Math.sqrt(logo.ratio || 1)).toFixed(3) }}
+                />
               </li>
             ))}
           </ul>
@@ -46,14 +52,12 @@ function InternationalBrandsSection() {
 
       <div className="ds-wrap ds-clients__row-head">
         <h3>Global launches</h3>
-        <span>{launchBrands.length} international brands we brought to India</span>
       </div>
       <LogoMarquee logos={launchBrands} direction="left" duration={60} label="International brands launched in India" tone="light" eager />
 
       <div className="ds-clients__band">
         <div className="ds-wrap ds-clients__row-head ds-clients__row-head--dark">
           <h3>And won the trust of many…</h3>
-          <span>{partnerBrands.length} Indian and global brands</span>
         </div>
         <LogoMarquee logos={partnerBrands} direction="right" duration={220} label="Brands we have worked with" tone="dark" />
       </div>
