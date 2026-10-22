@@ -81,6 +81,68 @@ select {
   }
 }
 
+/* ---------- Preloader ---------- */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--ds-navy);
+  transition: opacity 720ms ease, visibility 720ms ease;
+}
+
+body.loaded .preloader {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader__logo-container {
+  position: relative;
+  width: min(80vw, 960px);
+  aspect-ratio: 1025 / 321;
+}
+
+.loader__logo-base,
+.loader__logo-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loader__logo-base {
+  opacity: 0.15;
+}
+
+.loader__logo-fill {
+  transition: clip-path 0.15s ease-out;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 620ms var(--ds-ease), transform 620ms var(--ds-ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ---------- Layout primitives ---------- */
 
 .ds-wrap {
@@ -363,15 +425,13 @@ main {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--ds-navy);
 }
 
 .ds-menu__links a {
   display: flex;
   align-items: baseline;
   gap: 24px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--ds-navy);
+  padding: 4px 0;
   color: var(--ds-navy);
   text-decoration: none;
   transition: padding 0.2s var(--ds-ease), background-color 0.2s var(--ds-ease), color 0.2s var(--ds-ease);
@@ -424,9 +484,7 @@ main {
 .ds-menu__info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-top: 16px;
-  border-top: 1px solid var(--ds-navy);
+  gap: 6px;
   font-size: 16px;
   line-height: 1.5;
 }
@@ -595,6 +653,10 @@ main {
   --tile-bg: var(--ds-raspberry);
   --tile-ink: var(--ds-white);
   --tile-accent: var(--ds-blush);
+}
+
+.ds-services__tile--raspberry .ds-services__name {
+  color: var(--ds-white);
 }
 
 .ds-services__tile--blush {
