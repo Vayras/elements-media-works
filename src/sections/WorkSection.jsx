@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { asset } from "../asset";
 import reels from "../data/reels.json";
 
@@ -7,58 +8,69 @@ const workItems = [
   {
     image: asset("assets/images/work/reel-dkjq5kboc-f.jpg"),
     title: "Eze Perfumes",
+    filter: "Campaigns",
     category: "Campaign",
     href: "https://www.instagram.com/elementsmediaworks/reel/DKjq5kBoC-F/",
   },
   {
     image: asset("assets/images/work/post-dkhnd11ol6c.jpg"),
     title: "Johnnie Walker",
+    filter: "Campaigns",
     category: "Keep Walking",
     href: "https://www.instagram.com/elementsmediaworks/p/DKHNd11ol6C/",
   },
   {
     image: asset("assets/images/work/post-dj4es-tinoh.jpg"),
     title: "Vivienne Westwood",
+    filter: "Campaigns",
     category: "Fashion Week",
     href: "https://www.instagram.com/elementsmediaworks/p/DJ4es_tINoH/",
   },
   {
     image: asset("assets/images/work/why-work-with-us.jpg"),
     title: "Why Work With Us?",
+    filter: "Social",
     category: "Instagram",
     href: "https://www.instagram.com/elementsmediaworks/p/DNSUih-Ig3Q/",
   },
   {
     image: asset("assets/images/work/post-dwx83shihnc.jpg"),
     title: "The Face Shop",
+    filter: "Brand Elchemy",
     category: "Brand Elchemy",
     href: "https://www.instagram.com/elementsmediaworks/p/DWX83shiHNC/",
   },
   {
     image: asset("assets/images/work/post-dwtng4bikxl.jpg"),
     title: "Spykar",
+    filter: "Brand Elchemy",
     category: "Brand Elchemy",
     href: "https://www.instagram.com/elementsmediaworks/p/DWTnG4biKXl/",
   },
   {
     image: asset("assets/images/work/post-duyj5cgchs3.jpg"),
     title: "Black Dog",
+    filter: "Brand Elchemy",
     category: "Brand Elchemy",
     href: "https://www.instagram.com/elementsmediaworks/p/DUYJ5CgCHs3/",
   },
   {
     image: asset("assets/images/work/post-dtfqrg2indy.jpg"),
     title: "Black Dog Soda",
+    filter: "Campaigns",
     category: "Campaign",
     href: "https://www.instagram.com/elementsmediaworks/p/DTfQrG2iNdY/",
   },
   {
     image: asset("assets/images/work/reel-do5xiisinwe.jpg"),
     title: "L'Oreal Paris x Tira",
+    filter: "Campaigns",
     category: "Campaign",
     href: "https://www.instagram.com/elementsmediaworks/reel/DO5XiISiNWe/",
   },
 ];
+
+const FILTERS = ["All", "Campaigns", "Brand Elchemy", "Social"];
 
 function ReelTile({ href, image, title, meta, index }) {
   return (
@@ -80,6 +92,9 @@ function ReelTile({ href, image, title, meta, index }) {
 }
 
 function WorkSection() {
+  const [filter, setFilter] = useState("All");
+  const shown = filter === "All" ? workItems : workItems.filter((item) => item.filter === filter);
+
   return (
     <section className="ds-work" id="projects" aria-labelledby="workTitle">
       <div className="ds-wrap">
@@ -98,8 +113,27 @@ function WorkSection() {
           </a>
         </div>
 
+        <div className="ds-work__bar">
+          <div className="ds-work__filters" role="group" aria-label="Filter reels">
+            {FILTERS.map((label) => (
+              <button
+                type="button"
+                className="ds-work__filter"
+                aria-pressed={label === filter}
+                onClick={() => setFilter(label)}
+                key={label}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <span className="ds-caps" aria-live="polite">
+            {shown.length} reels
+          </span>
+        </div>
+
         <ol className="ds-work__rail">
-          {workItems.map((item, index) => (
+          {shown.map((item, index) => (
             <ReelTile
               key={item.href}
               href={item.href}
